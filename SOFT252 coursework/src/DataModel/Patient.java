@@ -1,6 +1,8 @@
 package DataModel;
 
-public class Patient extends User implements IObserver{
+import java.util.ArrayList;
+
+public class Patient extends User implements IObservable{
 
     private int age;
     private String gender;
@@ -8,22 +10,22 @@ public class Patient extends User implements IObserver{
     private Note notes;
 
 private ArrayList<IObserver> observers;
-private int data =0;
+private String date;
 
 @Override
-public void registerObserver(IObserver observer) {
+public void RegisterObserver(IObserver observer) {
 observers.add(observer);
 }
 
 @Override
-public void removeObserver(IObserver observer){
+public void RemoveObserver(IObserver observer){
 observers.remove(observer);
 }
 
 @Override
-public void notifyObservers(){
+public void NotifiyObservers(){
 for(int i = 0; i < observers.size(); i++){
-observers.get(i).update(data);
+observers.get(i).update(date);
 }
 }
 

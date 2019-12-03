@@ -11,6 +11,6 @@ package DataModel;
  * @author Student
  */
 public interface IObserver {
-public void update(Appointment newAppointment);
+public void update(String date);
 
 }

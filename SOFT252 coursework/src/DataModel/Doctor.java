@@ -3,11 +3,12 @@ package DataModel;
 public class Doctor extends User implements IObserver{
 
 public Doctor(IObservable observable){
-observable.registerObserver(this);
+observable.RegisterObserver(this);
 }
 
-public void update(int data){
-System.out.Println("Successfully notified " + data);
+@Override
+public void update(String appointmentDate){
+System.out.println("Successfully notified " + appointmentDate);
 }
 
     private void ViewAppointments() {
