@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DataModel;
 
 /**
  *
- * @author Student
+ * @author dsmale
  */
-public class Medicines {
-
-   private String medicineName;
+public class DoctorFeedback {
     
+    public int doctorID;
+    public int rating;
+    public String feedbackNotes;
     
 }

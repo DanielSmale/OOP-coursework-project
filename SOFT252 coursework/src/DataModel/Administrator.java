@@ -6,6 +6,7 @@ public class Administrator extends User {
     
     public void CreateAccount(){
         
+        
     }
     
     public void AddUser(){

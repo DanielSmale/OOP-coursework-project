@@ -11,7 +11,16 @@ package DataModel;
  * @author Student
  */
 public class Appointment {
-        
-public String date;
+    
+    private String doctorID;
+    private String patientID;
+        private String date;
+
+    public Appointment(String date, String doctorID,String patientID){
+        this.date = date;
+        this.doctorID = doctorID;
+        this.patientID = patientID;
+    }
+    
 
 }

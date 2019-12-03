@@ -25,10 +25,13 @@ System.out.println("Successfully notified " + appointmentDate);
 
     private void CreateAppointment() {
 
+        Appointment newAppointment = new Appointment("9/9/2020", "d01","p01");
+        
     }
 
     private void PrescribeMedicine(){
-        
+        Medicines paracetimal = new Medicines();
+        Prescription newPrescription = new Prescription("d01", "p01", "Swallow through bottom", paracetimal, 10, 5.5f);
     }
     
     private void CreateNewMedicine(){
