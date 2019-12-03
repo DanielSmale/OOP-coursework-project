@@ -1,6 +1,11 @@
 package DataModel;
 
-public class Secretary extends User {
+public class Secretary extends User implements IObserver {
+
+    @Override
+    public void update(String appointmentDate) {
+        System.out.println("Successfully notified " + appointmentDate);
+    }
 
     private void ApprovePatientAccount() {
 
