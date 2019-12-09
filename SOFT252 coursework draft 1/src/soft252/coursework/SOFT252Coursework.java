@@ -5,6 +5,8 @@
  */
 package soft252.coursework;
 
+import DataModel.Doctor;
+
 /**
  *
  * @author Student
@@ -16,8 +18,10 @@ public class SOFT252Coursework {
      */
     public static void main(String[] args) {
      
+        Doctor banner = new Doctor();
         
-        
+        banner.appointmentCreator.CreateAppointment();
+        banner.ViewAppointments();
         
     }
     
