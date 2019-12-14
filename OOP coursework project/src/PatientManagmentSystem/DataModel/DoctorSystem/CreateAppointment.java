@@ -1,7 +1,8 @@
 package PatientManagmentSystem.DataModel.DoctorSystem;
-
+import java.io.*;
 public class CreateAppointment {
 
+	
 	public String date;
 	public String doctorID;
 	public String patientID;
@@ -12,6 +13,8 @@ public class CreateAppointment {
 		this.patientID = inPatientID;
 		this.doctorID = inDoctorID;
 
+		
+		
 	}
 	
 	
