@@ -59,8 +59,8 @@ public class DoctorCreateAppointment {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblDoctors = new JLabel("Doctors");
-		lblDoctors.setBounds(0, 0, 616, 16);
+		JLabel lblDoctors = new JLabel("Doctors create appointment");
+		lblDoctors.setBounds(22, 17, 616, 16);
 		frame.getContentPane().add(lblDoctors);
 		
 		JButton btnCreateAppointment = new JButton("Create Appointment");

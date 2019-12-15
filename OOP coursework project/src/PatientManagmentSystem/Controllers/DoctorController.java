@@ -3,8 +3,11 @@ package PatientManagmentSystem.Controllers;
 import PatientManagmentSystem.DataModel.DoctorSystem.CreateAppointment;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+
 import org.json.*;
 
 public class DoctorController {
@@ -20,6 +23,23 @@ public class DoctorController {
 		return newAppointment;
 	}
 
+	public void ReturnAppointmentDetails() {
+		
+	try(FileReader reader = new FileReader(appointmentsFile)){
+		
+		
+		reader.read();
+		
+		reader.close();
+	}catch(IOException e) {
+		e.printStackTrace();
+	}
+	
+	
+		
+	}
+	
+	
 	private void StoreAppointmentDetails(CreateAppointment appointmentToStore) {
 
 		JSONObject appointmentDetails = new JSONObject();
