@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="OOP coursework project/src"/>
-	<classpathentry kind="src" path="SOFT252 coursework draft 1/src"/>
+	<classpathentry kind="lib" path="Lib/JSON.jar" sourcepath="Lib/JSON.jar"/>
 	<classpathentry kind="output" path="OOP coursework project/bin"/>
 </classpath>

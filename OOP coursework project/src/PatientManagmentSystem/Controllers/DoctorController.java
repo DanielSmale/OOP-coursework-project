@@ -2,14 +2,47 @@ package PatientManagmentSystem.Controllers;
 
 import PatientManagmentSystem.DataModel.DoctorSystem.CreateAppointment;
 
-public class DoctorController {
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import org.json.*;
 
+public class DoctorController {
+	File appointmentsFile = new File("appointments.json");
+
+	
+	
 	public CreateAppointment SendAppointmentDetails(String date, String patientID, String doctorID) {
-	CreateAppointment newAppointment = new CreateAppointment(date, patientID, doctorID);
+		CreateAppointment newAppointment = new CreateAppointment(date, patientID, doctorID);
+
+		StoreAppointmentDetails(newAppointment);
+
 		return newAppointment;
 	}
-	
-	
-	
-	
+
+	private void StoreAppointmentDetails(CreateAppointment appointmentToStore) {
+
+		JSONObject appointmentDetails = new JSONObject();
+		appointmentDetails.put("AppointmentDate", appointmentToStore.date);
+		appointmentDetails.put("PatientID", appointmentToStore.patientID);
+		appointmentDetails.put("DoctorID", appointmentToStore.doctorID);
+
+		JSONObject appointment = new JSONObject();
+		appointment.put("Appointment", appointmentDetails);
+
+		
+		
+		try (FileWriter writer = new FileWriter(appointmentsFile,true)) {
+			{
+				writer.write(appointment.toString());
+
+				writer.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		 System.out.printf("File is located at %s%n", appointmentsFile.getAbsolutePath());
+	}
+
 }
