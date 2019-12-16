@@ -10,8 +10,11 @@ import javax.swing.ListModel;
 
 import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
-public class ViewAppointment {
+import PatientManagmentSystem.Controllers.DoctorController;
 
+public class ViewAppointment {
+DoctorController doctorController = new DoctorController();
+	
 	private JFrame frame;
 
 	/**
@@ -37,13 +40,22 @@ public class ViewAppointment {
 	public ViewAppointment() {
 		initialize();
 	}
+	
+	public DefaultListModel<String> SetListsData() {
+
+		DefaultListModel<String> appointmentsDataListModel = new DefaultListModel<String>();
+		String appointmentDetails = doctorController.ReturnAppointmentDetails();
+		
+		appointmentsDataListModel.addElement(appointmentDetails);
+		return appointmentsDataListModel;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 564, 473);
+		frame.setBounds(100, 100, 1268, 509);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -52,17 +64,13 @@ public class ViewAppointment {
 		frame.getContentPane().add(lblDoctorsViewAppointments);
 
 		JList AppointmentsList = new JList();
-		AppointmentsList.setBounds(65, 103, 437, 214);
+		AppointmentsList.setBounds(65, 103, 1140, 214);
 		frame.getContentPane().add(AppointmentsList);
 		
+		DefaultListModel<String> model = SetListsData();
+		AppointmentsList.setModel(model);
 		
 	}
 
-	public void SetListsData() {
-
-		DefaultListModel<String> appointmentsDataListModel = new DefaultListModel<String>();
-		
-		
-		
-	}
+	
 }
