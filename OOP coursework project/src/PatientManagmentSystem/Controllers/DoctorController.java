@@ -1,5 +1,6 @@
 package PatientManagmentSystem.Controllers;
 
+import PatientManagmentSystem.DataModel.Note;
 import PatientManagmentSystem.DataModel.DoctorSystem.CreateAppointment;
 import jdk.nashorn.internal.parser.JSONParser;
 
@@ -13,13 +14,22 @@ import org.json.*;
 
 public class DoctorController {
 	File appointmentsFile = new File("appointments.json");
+	CreateAppointment newAppointment;
 
 	public CreateAppointment SendAppointmentDetails(String date, String patientID, String doctorID) {
-		CreateAppointment newAppointment = new CreateAppointment(date, patientID, doctorID);
+		newAppointment = new CreateAppointment(date, patientID, doctorID); // Overwrite the old appointment and add it to the
+																		// text file
 
 		StoreAppointmentDetails(newAppointment);
 
 		return newAppointment;
+	}
+
+	public void SendNotes(String notes) {
+
+		Note note = new Note(newAppointment, notes);
+		newAppointment.notes = note;
+
 	}
 
 	public String ReturnAppointmentDetails() {
@@ -37,7 +47,6 @@ public class DoctorController {
 
 		JSONObject readAppointment = new JSONObject(outInfo);
 
-
 		return readAppointment.toString();
 	}
 
@@ -47,6 +56,7 @@ public class DoctorController {
 		appointmentDetails.put("AppointmentDate", appointmentToStore.date);
 		appointmentDetails.put("PatientID", appointmentToStore.patientID);
 		appointmentDetails.put("DoctorID", appointmentToStore.doctorID);
+		appointmentDetails.put("Notes", appointmentToStore.notes.notes);
 
 		JSONObject appointment = new JSONObject();
 		appointment.put("Appointment", appointmentDetails);

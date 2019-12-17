@@ -1,4 +1,4 @@
-package PatientManagmentSystem.Views;
+package PatientManagmentSystem.Views.DoctorUI;
 
 import java.awt.EventQueue;
 
@@ -67,9 +67,9 @@ public class DoctorCreateAppointment {
 		btnCreateAppointment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			
-				CreateAppointment appointment = doctorController.SendAppointmentDetails(AppointmentDateTxt.getText(), patientIDTxt.getText(), doctorIDTxt.getText());
+				CreateAppointment createAppointment = doctorController.SendAppointmentDetails(AppointmentDateTxt.getText(), patientIDTxt.getText(), doctorIDTxt.getText());
 				
-				System.out.println(appointment.date + " " + appointment.doctorID + " " + appointment.patientID);
+				System.out.println(createAppointment.date + " " + createAppointment.doctorID + " " + createAppointment.patientID);
 				
 			}
 		});

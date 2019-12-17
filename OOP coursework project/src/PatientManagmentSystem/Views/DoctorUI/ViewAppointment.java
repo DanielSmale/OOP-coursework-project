@@ -1,4 +1,4 @@
-package PatientManagmentSystem.Views;
+package PatientManagmentSystem.Views.DoctorUI;
 
 import java.awt.EventQueue;
 
@@ -41,7 +41,7 @@ DoctorController doctorController = new DoctorController();
 		initialize();
 	}
 	
-	public DefaultListModel<String> SetListsData() {
+	private DefaultListModel<String> SetListsData() {
 
 		DefaultListModel<String> appointmentsDataListModel = new DefaultListModel<String>();
 		String appointmentDetails = doctorController.ReturnAppointmentDetails();
