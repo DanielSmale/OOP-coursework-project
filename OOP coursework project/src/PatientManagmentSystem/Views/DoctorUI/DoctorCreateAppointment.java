@@ -63,18 +63,7 @@ public class DoctorCreateAppointment {
 		lblDoctors.setBounds(22, 17, 616, 16);
 		frame.getContentPane().add(lblDoctors);
 		
-		JButton btnCreateAppointment = new JButton("Create Appointment");
-		btnCreateAppointment.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			
-				CreateAppointment createAppointment = doctorController.SendAppointmentDetails(AppointmentDateTxt.getText(), patientIDTxt.getText(), doctorIDTxt.getText());
-				
-				System.out.println(createAppointment.date + " " + createAppointment.doctorID + " " + createAppointment.patientID);
-				
-			}
-		});
-		btnCreateAppointment.setBounds(97, 46, 181, 25);
-		frame.getContentPane().add(btnCreateAppointment);
+	
 		
 		AppointmentDateTxt = new JTextField();
 		AppointmentDateTxt.setBounds(162, 84, 116, 22);
@@ -102,5 +91,19 @@ public class DoctorCreateAppointment {
 		patientIDTxt.setBounds(162, 119, 116, 22);
 		frame.getContentPane().add(patientIDTxt);
 		patientIDTxt.setColumns(10);
+		
+		
+		JButton btnCreateAppointment = new JButton("Create Appointment");
+		btnCreateAppointment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+				CreateAppointment createAppointment = doctorController.SendAppointmentDetails(AppointmentDateTxt.getText(), patientIDTxt.getText(), doctorIDTxt.getText());
+				
+				System.out.println(createAppointment.getDate() + " " + createAppointment.getDoctorID() + " " + createAppointment.getPatientID());
+				
+			}
+		});
+		btnCreateAppointment.setBounds(97, 46, 181, 25);
+		frame.getContentPane().add(btnCreateAppointment);
 	}
 }

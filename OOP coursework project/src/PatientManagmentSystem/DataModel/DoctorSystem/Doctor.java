@@ -1,10 +1,9 @@
 package PatientManagmentSystem.DataModel.DoctorSystem;
 
-import PatientManagmentSystem.DataModel.IUser;
+import PatientManagmentSystem.DataModel.AbstractUser;
 
-public class Doctor implements IUser {
+public class Doctor extends AbstractUser {
 
-	
-	
+ 
 	
 }

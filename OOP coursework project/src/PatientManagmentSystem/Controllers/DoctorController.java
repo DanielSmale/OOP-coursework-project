@@ -28,7 +28,7 @@ public class DoctorController {
 	public void SendNotes(String notes) {
 
 		Note note = new Note(newAppointment, notes);
-		newAppointment.notes = note;
+		newAppointment.setNotes(note);
 
 	}
 
@@ -53,10 +53,10 @@ public class DoctorController {
 	private void StoreAppointmentDetails(CreateAppointment appointmentToStore) {
 
 		JSONObject appointmentDetails = new JSONObject();
-		appointmentDetails.put("AppointmentDate", appointmentToStore.date);
-		appointmentDetails.put("PatientID", appointmentToStore.patientID);
-		appointmentDetails.put("DoctorID", appointmentToStore.doctorID);
-		appointmentDetails.put("Notes", appointmentToStore.notes.notes);
+		appointmentDetails.put("AppointmentDate", appointmentToStore.getDate());
+		appointmentDetails.put("PatientID", appointmentToStore.getPatientID());
+		appointmentDetails.put("DoctorID", appointmentToStore.getDoctorID());
+	//	appointmentDetails.put("Notes", appointmentToStore.getNotes().notes);
 
 		JSONObject appointment = new JSONObject();
 		appointment.put("Appointment", appointmentDetails);

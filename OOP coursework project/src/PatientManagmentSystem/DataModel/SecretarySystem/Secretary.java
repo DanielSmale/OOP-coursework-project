@@ -1,7 +1,7 @@
 package PatientManagmentSystem.DataModel.SecretarySystem;
 
-import PatientManagmentSystem.DataModel.IUser;
+import PatientManagmentSystem.DataModel.AbstractUser;
 
-public class Secretary implements IUser {
+public class Secretary extends AbstractUser {
 
 }

@@ -1,10 +1,19 @@
 package PatientManagmentSystem.DataModel.PatientSystem;
 
-public class AppointmentRequest {
-	// A user will ask for a appointment providing a range of dates they can do and
-	// the doctor they prefer
+import PatientManagmentSystem.DataModel.SecretarySystem.ReceiveAppointmentRequest;
 
-	String preferedDoctor;
-	String[] possibleDates;
-	
+public class AppointmentRequest {
+	// Request appointment – there should be an avenue to ask for a specific doctor
+	// and a range of
+	// potential dates.
+
+	String PreferredDoctorID;
+	String[] PreferedDates;
+
+	public void AppointmentRequest(String preferedDoctorID, String[] preferedDates) {
+
+		ReceiveAppointmentRequest.ReceiveAppointmentRequest(preferedDoctorID, preferedDates);
+
+	}
+
 }
