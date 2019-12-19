@@ -17,8 +17,9 @@ public class DoctorController {
 	CreateAppointment newAppointment;
 
 	public CreateAppointment SendAppointmentDetails(String date, String patientID, String doctorID) {
-		newAppointment = new CreateAppointment(date, patientID, doctorID); // Overwrite the old appointment and add it to the
-																		// text file
+		newAppointment = new CreateAppointment(date, patientID, doctorID); // Overwrite the old appointment and add it
+																			// to the
+																			// text file
 
 		StoreAppointmentDetails(newAppointment);
 
@@ -35,7 +36,7 @@ public class DoctorController {
 	public String ReturnAppointmentDetails() {
 
 		String outInfo = "";
-		try (BufferedReader reader = new BufferedReader(new FileReader("appointments.json"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(appointmentsFile))) {
 			{
 				outInfo = reader.readLine();
 
@@ -56,7 +57,7 @@ public class DoctorController {
 		appointmentDetails.put("AppointmentDate", appointmentToStore.getDate());
 		appointmentDetails.put("PatientID", appointmentToStore.getPatientID());
 		appointmentDetails.put("DoctorID", appointmentToStore.getDoctorID());
-	//	appointmentDetails.put("Notes", appointmentToStore.getNotes().notes);
+		// appointmentDetails.put("Notes", appointmentToStore.getNotes().notes); errors
 
 		JSONObject appointment = new JSONObject();
 		appointment.put("Appointment", appointmentDetails);

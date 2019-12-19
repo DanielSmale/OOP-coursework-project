@@ -1,14 +1,14 @@
 {
 	"Doctors": [
 		{
-			"givenName": "Bruce",
-			"surname": "Banner",
+			"givenName": "Banner",
+			"surname": "Bruce",
 			"uniqueID": "D1",
 			"password": "12345"
 		},
 		{
 			"givenName": "The",
-			"surname": "medic",
+			"surname": "Medic",
 			"uniqueID": "D2",
 			"password": "ABCD"
 		}
