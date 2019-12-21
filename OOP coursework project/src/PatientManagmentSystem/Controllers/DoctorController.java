@@ -15,6 +15,7 @@ import org.json.*;
 public class DoctorController {
 	File appointmentsFile = new File("appointments.json");
 	CreateAppointment newAppointment;
+	private boolean appendToFile = true;
 
 	public CreateAppointment SendAppointmentDetails(String date, String patientID, String doctorID) {
 		newAppointment = new CreateAppointment(date, patientID, doctorID); // Overwrite the old appointment and add it
@@ -62,7 +63,7 @@ public class DoctorController {
 		JSONObject appointment = new JSONObject();
 		appointment.put("Appointment", appointmentDetails);
 
-		try (FileWriter writer = new FileWriter(appointmentsFile, true)) {
+		try (FileWriter writer = new FileWriter(appointmentsFile, appendToFile)) {
 			{
 				writer.write(appointment.toString());
 

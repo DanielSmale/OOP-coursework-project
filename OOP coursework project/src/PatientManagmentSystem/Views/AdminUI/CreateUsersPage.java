@@ -1,4 +1,4 @@
-package PatientManagmentSystem.Views;
+package PatientManagmentSystem.Views.AdminUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,16 +7,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import PatientManagmentSystem.DataModel.AdministratorSystem.Administrator;
-import PatientManagmentSystem.Views.AdminUI.AdminMainPage;
+import PatientManagmentSystem.Controllers.AdministratorController;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
-public class LoginPage extends JFrame {
+public class CreateUsersPage extends JFrame {
+	AdministratorController administratorController = new AdministratorController();
 
 	private JPanel contentPane;
 	private JTextField givenNameTxt;
@@ -31,7 +33,7 @@ public class LoginPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginPage frame = new LoginPage();
+					CreateUsersPage frame = new CreateUsersPage();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,76 +45,96 @@ public class LoginPage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginPage() {
+	public CreateUsersPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 509, 505);
+		setBounds(100, 100, 531, 527);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblWelcome = new JLabel("Welcome");
-		lblWelcome.setBounds(28, 30, 56, 16);
-		contentPane.add(lblWelcome);
+		JLabel lblTitle = new JLabel("Provide your details for the admin to set up your account");
+		lblTitle.setHorizontalAlignment(SwingConstants.LEFT);
+		lblTitle.setBounds(56, 24, 383, 32);
+		contentPane.add(lblTitle);
 
 		JLabel lblGivenName = new JLabel("Given name");
-		lblGivenName.setBounds(47, 75, 86, 16);
+		lblGivenName.setBounds(29, 69, 86, 16);
 		contentPane.add(lblGivenName);
 
 		JLabel lblSurname = new JLabel("Surname");
-		lblSurname.setBounds(47, 104, 56, 16);
+		lblSurname.setBounds(29, 98, 56, 16);
 		contentPane.add(lblSurname);
 
 		JLabel lblUniqueId = new JLabel("Unique ID");
-		lblUniqueId.setBounds(47, 133, 56, 16);
+		lblUniqueId.setBounds(29, 127, 56, 16);
 		contentPane.add(lblUniqueId);
 
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(47, 162, 86, 16);
+		lblPassword.setBounds(29, 156, 86, 16);
 		contentPane.add(lblPassword);
 
 		givenNameTxt = new JTextField();
-		givenNameTxt.setBounds(128, 72, 303, 22);
-		contentPane.add(givenNameTxt);
 		givenNameTxt.setColumns(10);
+		givenNameTxt.setBounds(110, 66, 303, 22);
+		contentPane.add(givenNameTxt);
 
 		surnameTxt = new JTextField();
 		surnameTxt.setColumns(10);
-		surnameTxt.setBounds(128, 104, 303, 22);
+		surnameTxt.setBounds(110, 98, 303, 22);
 		contentPane.add(surnameTxt);
 
 		uniqueIDTxt = new JTextField();
 		uniqueIDTxt.setColumns(10);
-		uniqueIDTxt.setBounds(128, 133, 303, 22);
+		uniqueIDTxt.setBounds(110, 127, 303, 22);
 		contentPane.add(uniqueIDTxt);
 
 		passwordTxt = new JTextField();
 		passwordTxt.setColumns(10);
-		passwordTxt.setBounds(128, 162, 303, 22);
+		passwordTxt.setBounds(110, 156, 303, 22);
 		contentPane.add(passwordTxt);
+
+		JLabel lblUserType = new JLabel("User type");
+		lblUserType.setBounds(59, 200, 56, 16);
+		contentPane.add(lblUserType);
+
+		JRadioButton rdbtnDoctor = new JRadioButton("Doctor");
+		rdbtnDoctor.setBounds(119, 196, 71, 25);
+		contentPane.add(rdbtnDoctor);
+
+		JRadioButton rdbtnSecretary = new JRadioButton("Secretary");
+		rdbtnSecretary.setBounds(194, 196, 86, 25);
+		contentPane.add(rdbtnSecretary);
+
+		JRadioButton rdbtnPatient = new JRadioButton("Patient");
+		rdbtnPatient.setBounds(286, 196, 127, 25);
+		contentPane.add(rdbtnPatient);
 
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) { // when the user hits the enter button
+			public void actionPerformed(ActionEvent arg0) {
 
 				String givenName = givenNameTxt.getText();// take the values of the text box
 				String surname = surnameTxt.getText();
 				String uniqueIDValue = uniqueIDTxt.getText();
 				String password = passwordTxt.getText();
+				String userType = null;
 
-				AdminMainPage adminMainPage = new AdminMainPage(); // create the administrator
-				if (uniqueIDValue.equals("A1")) {
-					Administrator systemAdministrator = new Administrator(givenName, surname, uniqueIDValue, password);
-
-					// need to do storage here
-
-					dispose();
-					adminMainPage.setVisible(true); // and take them to their administrator page
+				if (rdbtnDoctor.isSelected()) {
+					userType = "Doctor";
 				}
+				if (rdbtnSecretary.isSelected()) {
+					userType = "Secretary";
+				}
+				if (rdbtnPatient.isSelected()) {
+					userType = "Patient";
+				}
+				administratorController.ReceivePotentialUserDetails(givenName, surname, uniqueIDValue, password,
+						userType);
+
 			}
 		});
-		btnEnter.setBounds(138, 209, 97, 25);
+		btnEnter.setBounds(123, 255, 97, 25);
 		contentPane.add(btnEnter);
-
 	}
 }
