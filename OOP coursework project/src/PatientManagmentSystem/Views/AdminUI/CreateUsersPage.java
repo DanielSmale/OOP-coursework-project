@@ -132,6 +132,14 @@ public class CreateUsersPage extends JFrame {
 				administratorController.ReceivePotentialUserDetails(givenName, surname, uniqueIDValue, password,
 						userType); // and send them to the admin controller to be created
 
+				givenNameTxt.setText("");
+				surnameTxt.setText("");
+				uniqueIDTxt.setText("");
+				passwordTxt.setText("");
+				rdbtnDoctor.setSelected(false);
+				rdbtnSecretary.setSelected(false);
+				rdbtnPatient.setSelected(false);
+
 			}
 		});
 		btnEnter.setBounds(123, 255, 97, 25);

@@ -1,5 +1,6 @@
 package PatientManagmentSystem.Controllers;
 
+import PatientManagmentSystem.DataModel.Appointment;
 import PatientManagmentSystem.DataModel.Note;
 import PatientManagmentSystem.DataModel.DoctorSystem.CreateAppointment;
 import jdk.nashorn.internal.parser.JSONParser;
@@ -14,11 +15,11 @@ import org.json.*;
 
 public class DoctorController {
 	File appointmentsFile = new File("appointments.json");
-	CreateAppointment newAppointment;
+	Appointment newAppointment;
 	private boolean appendToFile = true;
 
 	public void SendAppointmentDetails(String date, String patientID, String doctorID) {
-		newAppointment = new CreateAppointment(date, patientID, doctorID); // Overwrite the old appointment and add it
+		newAppointment = new Appointment(date, patientID, doctorID); // Overwrite the old appointment and add it
 																			// to the
 																			// text file
 
@@ -27,9 +28,8 @@ public class DoctorController {
 
 	public void SendNotes(String notes) {
 
-		Note note = new Note(newAppointment, notes);
-		newAppointment.setNotes(note);
-
+		Note note = new Note(notes);
+		
 	}
 
 	public String ReturnAppointmentDetails() {
@@ -50,12 +50,12 @@ public class DoctorController {
 		return readAppointment.toString();
 	}
 
-	private void StoreAppointmentDetails(CreateAppointment appointmentToStore) {
+	private void StoreAppointmentDetails(Appointment newAppointment) {
 
 		JSONObject appointmentDetails = new JSONObject();
-		appointmentDetails.put("AppointmentDate", appointmentToStore.getDate());
-		appointmentDetails.put("PatientID", appointmentToStore.getPatientID());
-		appointmentDetails.put("DoctorID", appointmentToStore.getDoctorID());
+		appointmentDetails.put("AppointmentDate", newAppointment.getDate());
+		appointmentDetails.put("PatientID", newAppointment.getPatientID());
+		appointmentDetails.put("DoctorID", newAppointment.getDoctorID());
 		// appointmentDetails.put("Notes", appointmentToStore.getNotes().notes); errors
 
 		JSONObject appointment = new JSONObject();

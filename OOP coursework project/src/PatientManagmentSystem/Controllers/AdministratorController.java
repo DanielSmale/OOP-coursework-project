@@ -97,4 +97,28 @@ public class AdministratorController {
 		}
 		System.out.printf("File is located at %s%n", patientFile.getAbsolutePath());
 	}
+
+	public void StoreAdministratorDetails(Administrator administratorToStore) {
+		File administratorFile = new File("administratorFile.json");
+
+		JSONObject administratorDetails = new JSONObject();
+		administratorDetails.put("givenName", administratorToStore.getGivenName());
+		administratorDetails.put("surname", administratorToStore.getSurname());
+		administratorDetails.put("uniqueID", administratorToStore.getUniqueID());
+		administratorDetails.put("password", administratorToStore.getPassword());
+
+		JSONObject administrator = new JSONObject();
+		administrator.put("Administrator", administratorDetails);
+
+		try (FileWriter writer = new FileWriter(administratorFile, appendToFile)) {
+			{
+				writer.write(administrator.toString());
+
+				writer.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.printf("File is located at %s%n", administratorFile.getAbsolutePath());
+	}
 }

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import PatientManagmentSystem.Controllers.AdministratorController;
 import PatientManagmentSystem.DataModel.AdministratorSystem.Administrator;
 import PatientManagmentSystem.Views.AdminUI.AdminMainPage;
 
@@ -100,15 +101,22 @@ public class LoginPage extends JFrame {
 				String uniqueIDValue = uniqueIDTxt.getText();
 				String password = passwordTxt.getText();
 
-				AdminMainPage adminMainPage = new AdminMainPage(); // create the administrator
-				if (uniqueIDValue.equals("A1")) {
+				AdminMainPage adminMainPage = new AdminMainPage(); // create the administrator page
+				if (uniqueIDValue.equals("A1")) { 
 					Administrator systemAdministrator = new Administrator(givenName, surname, uniqueIDValue, password);
 
-					// need to do storage here
+					AdministratorController administratorController = new AdministratorController();
+
+					administratorController.StoreAdministratorDetails(systemAdministrator);
 
 					dispose();
 					adminMainPage.setVisible(true); // and take them to their administrator page
 				}
+
+				givenNameTxt.setText("");
+				surnameTxt.setText("");
+				uniqueIDTxt.setText("");
+				passwordTxt.setText("");
 			}
 		});
 		btnEnter.setBounds(138, 209, 97, 25);
