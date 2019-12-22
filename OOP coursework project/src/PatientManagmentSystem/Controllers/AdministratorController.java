@@ -9,10 +9,10 @@ import org.json.JSONObject;
 import PatientManagmentSystem.DataModel.AbstractUser;
 import PatientManagmentSystem.DataModel.PotentialUser;
 import PatientManagmentSystem.DataModel.AdministratorSystem.Administrator;
+import PatientManagmentSystem.DataModel.AdministratorSystem.UserFactory;
 
 public class AdministratorController {
 
-	Administrator tempAdmin = new Administrator("", "", "", ""); // read this data in from file
 	PotentialUser potentialUser;
 
 	private boolean appendToFile = true;
@@ -20,13 +20,10 @@ public class AdministratorController {
 	public void ReceivePotentialUserDetails(String givenName, String surname, String uniqueID, String password,
 			String userType) {
 
-		potentialUser = new PotentialUser(givenName, surname, uniqueID, password, userType);
+		UserFactory userFactory = new UserFactory();
 
-		tempAdmin.CreateUser(userType); // erroring issue with structure??
-	}
+		userFactory.CreateUser(givenName, surname, uniqueID, password, userType);
 
-	public PotentialUser SendPotentialUserDetails() {
-		return potentialUser;
 	}
 
 	public void StoreDoctorDetails(AbstractUser doctorToStore) {

@@ -11,8 +11,4 @@ public class Doctor extends AbstractUser {
 
 	}
 
-	public Doctor(PotentialUser potentialUserDetails) {
-		super(potentialUserDetails);
-	}
-
 }

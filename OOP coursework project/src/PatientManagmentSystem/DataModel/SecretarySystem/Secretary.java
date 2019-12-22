@@ -10,8 +10,4 @@ public class Secretary extends AbstractUser {
 
 	}
 
-	public Secretary(PotentialUser potentialUser) {
-		super(potentialUser);
-	}
-
 }

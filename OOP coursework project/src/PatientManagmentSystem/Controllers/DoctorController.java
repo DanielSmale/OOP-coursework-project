@@ -17,14 +17,12 @@ public class DoctorController {
 	CreateAppointment newAppointment;
 	private boolean appendToFile = true;
 
-	public CreateAppointment SendAppointmentDetails(String date, String patientID, String doctorID) {
+	public void SendAppointmentDetails(String date, String patientID, String doctorID) {
 		newAppointment = new CreateAppointment(date, patientID, doctorID); // Overwrite the old appointment and add it
 																			// to the
 																			// text file
 
 		StoreAppointmentDetails(newAppointment);
-
-		return newAppointment;
 	}
 
 	public void SendNotes(String notes) {

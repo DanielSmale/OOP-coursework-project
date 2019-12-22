@@ -130,7 +130,7 @@ public class CreateUsersPage extends JFrame {
 					userType = "Patient";
 				}
 				administratorController.ReceivePotentialUserDetails(givenName, surname, uniqueIDValue, password,
-						userType);
+						userType); // and send them to the admin controller to be created
 
 			}
 		});

@@ -10,8 +10,4 @@ public class Patient extends AbstractUser {
 
 	}
 
-	public Patient(PotentialUser potentialUser) {
-		super(potentialUser);
-	}
-
 }
