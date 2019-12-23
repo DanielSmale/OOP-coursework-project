@@ -14,22 +14,23 @@ import java.io.IOException;
 import org.json.*;
 
 public class DoctorController {
-	File appointmentsFile = new File("appointments.json");
-	Appointment newAppointment;
+	File appointmentsFile = new File("appointmentsFile.json");
 	private boolean appendToFile = true;
 
 	public void SendAppointmentDetails(String date, String patientID, String doctorID) {
-		newAppointment = new Appointment(date, patientID, doctorID); // Overwrite the old appointment and add it
-																			// to the
-																			// text file
+		Appointment nextAppointment = new Appointment(date, patientID, doctorID);
 
-		StoreAppointmentDetails(newAppointment);
+		StoreAppointmentDetails(nextAppointment);
 	}
 
-	public void SendNotes(String notes) {
+	public void SendNotes(String notes, String date, String patientID, String doctorID) {
 
 		Note note = new Note(notes);
-		
+
+		Appointment relatedAppointment = new Appointment(date, doctorID, patientID);
+		note.setRelatedAppointment(relatedAppointment);
+
+		StoreNoteDetails(note);
 	}
 
 	public String ReturnAppointmentDetails() {
@@ -45,9 +46,11 @@ public class DoctorController {
 			e.printStackTrace();
 		}
 
-		JSONObject readAppointment = new JSONObject(outInfo);
+		JSONObject readAppointments = new JSONObject(outInfo);
 
-		return readAppointment.toString();
+		
+		
+		return readAppointments.toString();
 	}
 
 	private void StoreAppointmentDetails(Appointment newAppointment) {
@@ -56,7 +59,6 @@ public class DoctorController {
 		appointmentDetails.put("AppointmentDate", newAppointment.getDate());
 		appointmentDetails.put("PatientID", newAppointment.getPatientID());
 		appointmentDetails.put("DoctorID", newAppointment.getDoctorID());
-		// appointmentDetails.put("Notes", appointmentToStore.getNotes().notes); errors
 
 		JSONObject appointment = new JSONObject();
 		appointment.put("Appointment", appointmentDetails);
@@ -73,4 +75,25 @@ public class DoctorController {
 		System.out.printf("File is located at %s%n", appointmentsFile.getAbsolutePath());
 	}
 
+	private void StoreNoteDetails(Note noteToRecord) {
+
+		JSONObject noteDetails = new JSONObject();
+		noteDetails.put("noteString", noteToRecord.getNotes());
+		noteDetails.put("relatedAppointment", noteToRecord.getRelatedAppointment());
+		File notesFile = new File("notes.json");
+
+		JSONObject note = new JSONObject();
+		note.put("Note", noteDetails);
+
+		try (FileWriter writer = new FileWriter(notesFile, appendToFile)) {
+			{
+				writer.write(note.toString());
+
+				writer.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.printf("File is located at %s%n", notesFile.getAbsolutePath());
+	}
 }

@@ -10,9 +10,9 @@ public class AppointmentRequest {
 	String PreferredDoctorID;
 	String[] PreferedDates;
 
-	public void AppointmentRequest(String preferedDoctorID, String[] preferedDates) {
+	public void AppointmentRequest(String preferedDoctorID, String patientID, String[] preferedDates) {
 
-		ReceiveAppointmentRequest.ReceiveAppointmentRequest(preferedDoctorID, preferedDates);
+		ReceiveAppointmentRequest.ReceiveAppointmentRequest(preferedDoctorID, patientID, preferedDates);
 
 	}
 

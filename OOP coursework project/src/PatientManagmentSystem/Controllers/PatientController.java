@@ -4,10 +4,10 @@ import PatientManagmentSystem.DataModel.PatientSystem.AppointmentRequest;
 
 public class PatientController {
 
-	public void CreateAppointmentRequest(String preferedDoctorID, String[] preferedDates) {
+	public void CreateAppointmentRequest(String preferedDoctorID, String thisPatientID, String[] preferedDates) {
 
 		AppointmentRequest appointmentRequest = new AppointmentRequest();
-		appointmentRequest.AppointmentRequest(preferedDoctorID, preferedDates);
+		appointmentRequest.AppointmentRequest(preferedDoctorID, thisPatientID, preferedDates);
 
 	}
 
