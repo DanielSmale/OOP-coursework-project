@@ -36,7 +36,7 @@ public class DoctorController {
 	public String ReturnAppointmentDetails() {
 
 		String outInfo = "";
-		try (BufferedReader reader = new BufferedReader(new FileReader(appointmentsFile))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("appointmentsFile.json"))) {
 			{
 				outInfo = reader.readLine();
 
@@ -48,8 +48,6 @@ public class DoctorController {
 
 		JSONObject readAppointments = new JSONObject(outInfo);
 
-		
-		
 		return readAppointments.toString();
 	}
 

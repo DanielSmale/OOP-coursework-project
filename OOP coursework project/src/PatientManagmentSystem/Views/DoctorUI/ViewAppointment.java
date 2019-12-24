@@ -13,8 +13,8 @@ import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 import PatientManagmentSystem.Controllers.DoctorController;
 
 public class ViewAppointment {
-DoctorController doctorController = new DoctorController();
-	
+	DoctorController doctorController = new DoctorController();
+
 	private JFrame frame;
 
 	/**
@@ -40,12 +40,12 @@ DoctorController doctorController = new DoctorController();
 	public ViewAppointment() {
 		initialize();
 	}
-	
+
 	private DefaultListModel<String> SetListsData() {
 
 		DefaultListModel<String> appointmentsDataListModel = new DefaultListModel<String>();
 		String appointmentDetails = doctorController.ReturnAppointmentDetails();
-		
+
 		appointmentsDataListModel.addElement(appointmentDetails);
 		return appointmentsDataListModel;
 	}
@@ -66,11 +66,10 @@ DoctorController doctorController = new DoctorController();
 		JList AppointmentsList = new JList();
 		AppointmentsList.setBounds(65, 103, 1140, 214);
 		frame.getContentPane().add(AppointmentsList);
-		
+
 		DefaultListModel<String> model = SetListsData();
 		AppointmentsList.setModel(model);
-		
+
 	}
 
-	
 }

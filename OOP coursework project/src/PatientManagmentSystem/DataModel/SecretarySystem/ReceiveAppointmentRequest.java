@@ -31,7 +31,7 @@ public class ReceiveAppointmentRequest {
 						// and if one of the preferred dates are available
 						Appointment requestedAppointment = new Appointment(currentAppointment.getDate(),
 								preferedDoctorID, patientID); // create an appointment
-						secretaryController.StoreAppointmentDetails(requestedAppointment);
+					//	secretaryController.StoreAppointmentDetails(requestedAppointment); doesnt work
 					} else {
 						i++;
 					}
