@@ -1,6 +1,7 @@
 package PatientManagmentSystem.Controllers;
 
 import PatientManagmentSystem.DataModel.Appointment;
+import PatientManagmentSystem.DataModel.Medicine;
 import PatientManagmentSystem.DataModel.Note;
 import PatientManagmentSystem.DataModel.DoctorSystem.CreateAppointment;
 import jdk.nashorn.internal.parser.JSONParser;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import PatientManagmentSystem.DataModel.DoctorSystem.PrescribeMedicines;
 
 import org.json.*;
 
@@ -31,6 +33,16 @@ public class DoctorController {
 		note.setRelatedAppointment(relatedAppointment);
 
 		StoreNoteDetails(note);
+	}
+
+	public void CreateNewPrescription(String doctorID, String patientID, String doctorNotes, String medicine,
+			int quantity, double dosage) {
+
+		Note newNote = new Note(doctorNotes);
+		Medicine newMedicine = new Medicine();
+
+		PrescribeMedicines prescribeMedicine = new PrescribeMedicines();
+		prescribeMedicine.NewPrescription(doctorID, patientID, newNote, newMedicine, quantity, dosage);
 	}
 
 	public String ReturnAppointmentDetails() {

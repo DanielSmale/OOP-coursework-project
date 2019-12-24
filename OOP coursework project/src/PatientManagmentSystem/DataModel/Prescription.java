@@ -9,4 +9,15 @@ public class Prescription {
 	private int quantity;
 	private double dosage;
 
+	public Prescription(String doctorID, String patientID, Note doctorNote, Medicine medicine, int quantity,
+			double dosage) {
+		super();
+		this.doctorID = doctorID;
+		this.patientID = patientID;
+		this.doctorNote = doctorNote;
+		this.medicine = medicine;
+		this.quantity = quantity;
+		this.dosage = dosage;
+	}
+
 }
