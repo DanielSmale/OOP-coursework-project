@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.json.JSONObject;
 
 import PatientManagmentSystem.DataModel.AbstractUser;
+import PatientManagmentSystem.DataModel.DoctorFeedback;
 import PatientManagmentSystem.DataModel.PotentialUser;
 import PatientManagmentSystem.DataModel.AdministratorSystem.Administrator;
 import PatientManagmentSystem.DataModel.AdministratorSystem.UserFactory;
@@ -23,6 +24,11 @@ public class AdministratorController {
 		UserFactory userFactory = new UserFactory();
 
 		userFactory.CreateUser(givenName, surname, uniqueID, password, userType);
+
+	}
+
+	public void ReceivePatientFeedback(DoctorFeedback patientFeedback) {
+		
 
 	}
 
