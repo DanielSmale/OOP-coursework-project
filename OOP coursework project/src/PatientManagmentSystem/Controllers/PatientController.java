@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import PatientManagmentSystem.DataModel.Appointment;
 import PatientManagmentSystem.DataModel.PatientSystem.AppointmentRequest;
+import PatientManagmentSystem.DataModel.PatientSystem.GiveFeedback;
 
 public class PatientController {
 
@@ -17,7 +20,14 @@ public class PatientController {
 
 	}
 
-	public String ReturnAppointmentDetails() {
+	public void SendDoctorFeedback(String doctorID, int rating, String feedbackNotes) {
+
+		GiveFeedback giveFeedback = new GiveFeedback();
+		giveFeedback.GiveFeedback(doctorID, rating, feedbackNotes);
+
+	}
+
+	public Appointment[] ReturnAppointmentsDetails() {
 
 		String outInfo = "";
 		try (BufferedReader reader = new BufferedReader(new FileReader("appointmentsFile.json"))) {
@@ -30,9 +40,27 @@ public class PatientController {
 			e.printStackTrace();
 		}
 
-		JSONObject readAppointments = new JSONObject(outInfo);
+		JSONArray readAppointments = new JSONArray(outInfo);
 
-		return readAppointments.toString();
+		Appointment[] appointmentsList = new Appointment[readAppointments.length()];
+
+		if (readAppointments == null) {
+			System.out.println("JSON array empty");
+		} else {
+			int length = readAppointments.length();
+			for (int i = 0; i < length; i++) {
+
+				JSONObject individualAppointment = readAppointments.getJSONObject(i);
+
+				Appointment nextAppointment = new Appointment(individualAppointment.getString("AppointmentDate"),
+						individualAppointment.getString("DoctorID"), individualAppointment.getString("PatientID"));
+
+				appointmentsList[i] = nextAppointment;
+
+			}
+		}
+
+		return appointmentsList;
 	}
 
 }

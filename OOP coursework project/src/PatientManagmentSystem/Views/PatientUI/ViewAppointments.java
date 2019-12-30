@@ -9,11 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import PatientManagmentSystem.Controllers.PatientController;
+import PatientManagmentSystem.DataModel.Appointment;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
 
 public class ViewAppointments extends JFrame {
+	PatientController patientController = new PatientController();
 
 	private JPanel contentPane;
 
@@ -57,12 +59,18 @@ public class ViewAppointments extends JFrame {
 	}
 
 	private DefaultListModel<String> SetListsData() {
-		PatientController patientController = new PatientController();
 
 		DefaultListModel<String> appointmentsDataListModel = new DefaultListModel<String>();
-		String appointmentDetails = patientController.ReturnAppointmentDetails();
 
-		appointmentsDataListModel.addElement(appointmentDetails);
+		Appointment[] appointmentsList = patientController.ReturnAppointmentsDetails();
+
+		for (int i = 0; i < appointmentsList.length; i++) {
+
+			String appointmentInFo = appointmentsList[i].getDoctorID() + " " + appointmentsList[i].getPatientID() + " "
+					+ appointmentsList[i].getDate();
+
+			appointmentsDataListModel.addElement(appointmentInFo);
+		}
 		return appointmentsDataListModel;
 	}
 }

@@ -10,4 +10,7 @@ public class Patient extends AbstractUser {
 
 	}
 
+	
+	
+	
 }

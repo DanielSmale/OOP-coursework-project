@@ -51,7 +51,7 @@ public class AdministratorController {
 	}
 
 	public void StoreSecretaryDetails(AbstractUser secretaryToStore) {
-		File secretaryFile = new File("secretaryFile.json");
+		File secretarysFile = new File("secretaryFile.json");
 
 		JSONObject secretaryDetails = new JSONObject();
 		secretaryDetails.put("givenName", secretaryToStore.getGivenName());
@@ -62,7 +62,7 @@ public class AdministratorController {
 		JSONObject secretary = new JSONObject();
 		secretary.put("Secretary", secretaryDetails);
 
-		try (FileWriter writer = new FileWriter(secretaryFile, appendToFile)) {
+		try (FileWriter writer = new FileWriter(secretarysFile, appendToFile)) {
 			{
 				writer.write(secretary.toString());
 
@@ -71,7 +71,7 @@ public class AdministratorController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.printf("File is located at %s%n", secretaryFile.getAbsolutePath());
+		System.out.printf("File is located at %s%n", secretarysFile.getAbsolutePath());
 	}
 
 	public void StorePatientDetails(AbstractUser patientToStore) {

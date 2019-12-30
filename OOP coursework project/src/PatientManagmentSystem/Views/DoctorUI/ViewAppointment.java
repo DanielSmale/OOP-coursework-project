@@ -1,6 +1,7 @@
 package PatientManagmentSystem.Views.DoctorUI;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -11,6 +12,7 @@ import javax.swing.ListModel;
 import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
 import PatientManagmentSystem.Controllers.DoctorController;
+import PatientManagmentSystem.DataModel.Appointment;
 
 public class ViewAppointment {
 	DoctorController doctorController = new DoctorController();
@@ -44,9 +46,16 @@ public class ViewAppointment {
 	private DefaultListModel<String> SetListsData() {
 
 		DefaultListModel<String> appointmentsDataListModel = new DefaultListModel<String>();
-		String appointmentDetails = doctorController.ReturnAppointmentDetails();
 
-		appointmentsDataListModel.addElement(appointmentDetails);
+		Appointment[] appointmentsList = doctorController.ReturnAppointmentsDetails();
+
+		for (int i = 0; i < appointmentsList.length; i++) {
+
+			String appointmentInFo = appointmentsList[i].getDoctorID() + " " + appointmentsList[i].getPatientID() + " "
+					+ appointmentsList[i].getDate();
+
+			appointmentsDataListModel.addElement(appointmentInFo);
+		}
 		return appointmentsDataListModel;
 	}
 
