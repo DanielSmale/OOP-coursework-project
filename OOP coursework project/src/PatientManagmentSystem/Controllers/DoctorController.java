@@ -58,6 +58,7 @@ public class DoctorController {
 				allAppointmentsForSelectedPatient = java.util.Arrays.copyOf(allAppointmentsForSelectedPatient,
 						allAppointmentsForSelectedPatient.length + 5);
 			}
+			System.out.println(allAppointmentsForSelectedPatient[i]);
 		}
 
 		return allAppointmentsForSelectedPatient; // and return it

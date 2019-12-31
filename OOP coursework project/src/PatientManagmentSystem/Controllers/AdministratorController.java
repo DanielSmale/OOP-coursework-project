@@ -1,9 +1,12 @@
 package PatientManagmentSystem.Controllers;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import PatientManagmentSystem.DataModel.AbstractUser;
@@ -27,11 +30,92 @@ public class AdministratorController {
 
 	}
 
-	public void ReceivePatientFeedback(DoctorFeedback patientFeedback) {
+	public void RemoveUser(String userID) {
 		
+		String outInfo = "";
+		try (BufferedReader reader = new BufferedReader(new FileReader("feedbackFile.json"))) {
+			{
+				outInfo = reader.readLine();
 
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		JSONArray storedFeedback = new JSONArray(outInfo);
+
+		int length = storedFeedback.length();
+		DoctorFeedback[] readFeedback = new DoctorFeedback[storedFeedback.length()];
+		for (int i = 0; i < length; i++) {
+
+			JSONObject feedback = storedFeedback.getJSONObject(i);
+
+			DoctorFeedback current = new DoctorFeedback(feedback.getString("doctorID"), feedback.getInt("rating"),
+					feedback.getString("feedback"));
+
+			readFeedback[i] = current;
+
+		}
+		
+	}
+	
+	public DoctorFeedback[] ReturnFeedbackDetails() {
+
+		String outInfo = "";
+		try (BufferedReader reader = new BufferedReader(new FileReader("feedbackFile.json"))) {
+			{
+				outInfo = reader.readLine();
+
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		JSONArray storedFeedback = new JSONArray(outInfo);
+
+		int length = storedFeedback.length();
+		DoctorFeedback[] readFeedback = new DoctorFeedback[storedFeedback.length()];
+		for (int i = 0; i < length; i++) {
+
+			JSONObject feedback = storedFeedback.getJSONObject(i);
+
+			DoctorFeedback current = new DoctorFeedback(feedback.getString("doctorID"), feedback.getInt("rating"),
+					feedback.getString("feedback"));
+
+			readFeedback[i] = current;
+
+		}
+
+		return readFeedback;
 	}
 
+	public void StoreEdittedFeedback(DoctorFeedback feedback) {
+
+		JSONObject feedbackDetails = new JSONObject();
+		feedbackDetails.put("doctorID", feedback.getDoctorID());
+		feedbackDetails.put("rating", feedback.getRating());
+		feedbackDetails.put("feedback", feedback.getFeedbackNotes());
+
+		File edittedFeedbackFile = new File("edittedFeedbackFile.json");
+
+		JSONArray storedFeedback = new JSONArray();
+		storedFeedback.put(feedbackDetails);
+
+		try (FileWriter writer = new FileWriter(edittedFeedbackFile, appendToFile)) {
+			{
+				writer.write(storedFeedback.toString());
+
+				writer.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.printf("File is located at %s%n", edittedFeedbackFile.getAbsolutePath());
+	}
+	
+	
 	public void StoreDoctorDetails(AbstractUser doctorToStore) {
 		File doctorsFile = new File("doctorsFile.json");
 

@@ -97,6 +97,9 @@ public class DoctorCreateAppointment {
 				doctorController.SendAppointmentDetails(AppointmentDateTxt.getText(), patientIDTxt.getText(),
 						doctorIDTxt.getText());
 
+				patientIDTxt.setText("");
+				doctorIDTxt.setText("");
+				AppointmentDateTxt.setText("");
 			}
 		});
 		btnCreateAppointment.setBounds(97, 46, 181, 25);

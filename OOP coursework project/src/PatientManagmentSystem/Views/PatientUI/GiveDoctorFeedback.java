@@ -6,12 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import PatientManagmentSystem.Controllers.PatientController;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GiveDoctorFeedback extends JFrame {
-
+private PatientController patientController = new PatientController();
+	
 	private JPanel contentPane;
 	private JTextField doctorIDTextField;
 	private JTextField ratingTextField;
@@ -72,5 +79,20 @@ public class GiveDoctorFeedback extends JFrame {
 		ratingTextField.setBounds(126, 318, 116, 22);
 		contentPane.add(ratingTextField);
 		ratingTextField.setColumns(10);
+		
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				SendDoctorFeedback(doctorIDTextField.getText(),Integer.parseInt(ratingTextField.getText()), feedbackTextArea.getText());
+			}
+		});
+		btnSubmit.setBounds(267, 318, 97, 25);
+		contentPane.add(btnSubmit);
+	}
+	
+	public void SendDoctorFeedback(String doctorID, int rating, String feedback) {
+		
+		patientController.SendDoctorFeedback(doctorID, rating, feedback);
 	}
 }

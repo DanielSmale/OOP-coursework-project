@@ -13,4 +13,30 @@ public class DoctorFeedback {
 		this.feedbackNotes = feedbackNotes;
 	}
 
+	public String getDoctorID() {
+		return doctorID;
+	}
+
+	public void setDoctorID(String doctorID) {
+		this.doctorID = doctorID;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public String getFeedbackNotes() {
+		return feedbackNotes;
+	}
+
+	public void setFeedbackNotes(String feedbackNotes) {
+		this.feedbackNotes = feedbackNotes;
+	}
+
+	
+	
 }
