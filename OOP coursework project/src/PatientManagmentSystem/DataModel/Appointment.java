@@ -3,19 +3,16 @@ package PatientManagmentSystem.DataModel;
 public class Appointment {
 
 	private String date;
-	private String doctorID;
 	private String patientID;
+	private String doctorID;
 
-
-	public Appointment(String date, String doctorID, String patientID) {
+	public Appointment(String date, String patientID, String doctorID) {
 		super();
 		this.date = date;
-		this.doctorID = doctorID;
 		this.patientID = patientID;
+		this.doctorID = doctorID;
+
 	}
-
-
-
 
 	public String getDate() {
 		return date;
@@ -40,6 +37,5 @@ public class Appointment {
 	public void setPatientID(String patientID) {
 		this.patientID = patientID;
 	}
-
 
 }

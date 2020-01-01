@@ -1,1 +1,1 @@
-[{"DoctorID":"P1","PatientID":"D1","AppointmentDate":"1st"}][{"DoctorID":"P1","PatientID":"D1","AppointmentDate":"2nd"}]
+[{"DoctorID":"D1","PatientID":"P1","AppointmentDate":"1st"}]

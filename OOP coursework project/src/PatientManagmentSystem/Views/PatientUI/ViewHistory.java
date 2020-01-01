@@ -15,12 +15,14 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewHistory extends JFrame {
 	private PatientController patientController = new PatientController();
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField patientIDtextField;
 
 	/**
 	 * Launch the application.
@@ -57,21 +59,29 @@ public class ViewHistory extends JFrame {
 		lblYourId.setBounds(34, 68, 71, 16);
 		contentPane.add(lblYourId);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(96, 65, 172, 22);
-		contentPane.add(textField);
+		patientIDtextField = new JTextField();
+		patientIDtextField.setColumns(10);
+		patientIDtextField.setBounds(96, 65, 172, 22);
+		contentPane.add(patientIDtextField);
 
 		JList historyList = new JList();
 		historyList.setBounds(34, 125, 456, 323);
 		contentPane.add(historyList);
 
 		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				historyList.removeAll(); // remove anything left over in the list
+				historyList.setModel(PopulateHistoryList(patientIDtextField.getText()));
+
+			}
+		});
 		btnSearch.setBounds(298, 64, 97, 25);
 		contentPane.add(btnSearch);
 	}
 
-	private DefaultListModel PopulateHistoryList(String patientID) {
+	private DefaultListModel<String> PopulateHistoryList(String patientID) {
 		DefaultListModel<String> appointmentsDataListModel = new DefaultListModel<String>();
 
 		Appointment[] appointmentsList = patientController.GetPatientHistory(patientID);

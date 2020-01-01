@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import PatientManagmentSystem.Controllers.PatientController;
 import PatientManagmentSystem.DataModel.Appointment;
 

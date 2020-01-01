@@ -28,11 +28,11 @@ public class PatientController {
 
 		Appointment[] allAppointmentsList = ReturnAppointmentsDetails();
 		Appointment[] allAppointmentsForSelectedPatient = new Appointment[5]; // set the array to a size of 5 and resize
-																				// accordingly
+		System.out.println(allAppointmentsList.length); // accordingly
 
 		for (int i = 0; i < allAppointmentsList.length - 1; i++) {
 
-			if (patientID == allAppointmentsList[i].getPatientID()) {
+			if (patientID.equals(allAppointmentsList[i].getPatientID())) {
 				// if the appointment we're currently looking at has the same id as the patient
 				// we want, store it in an array
 				allAppointmentsForSelectedPatient[i] = allAppointmentsList[i];
@@ -99,12 +99,13 @@ public class PatientController {
 			System.out.println("JSON array empty");
 		} else {
 			int length = readAppointments.length();
-			for (int i = 0; i < length; i++) {
+			System.out.println(length);
+			for (int i = 0; i < length - 1; i++) {
 
 				JSONObject individualAppointment = readAppointments.getJSONObject(i);
 
 				Appointment nextAppointment = new Appointment(individualAppointment.getString("AppointmentDate"),
-						individualAppointment.getString("DoctorID"), individualAppointment.getString("PatientID"));
+						individualAppointment.getString("PatientID"), individualAppointment.getString("DoctorID"));
 
 				appointmentsList[i] = nextAppointment;
 

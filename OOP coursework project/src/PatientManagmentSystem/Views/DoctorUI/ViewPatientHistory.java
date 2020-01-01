@@ -81,13 +81,12 @@ public class ViewPatientHistory extends JFrame {
 		contentPane.add(btnSearch);
 	}
 
-	private DefaultListModel PopulateHistoryList(String patientID) {
+	private DefaultListModel<String> PopulateHistoryList(String patientID) {
 		DefaultListModel<String> appointmentsDataListModel = new DefaultListModel<String>();
 
 		Appointment[] appointmentsList = doctorController.GetPatientHistory(patientID);
 
 		for (int i = 0; i < appointmentsList.length - 1; i++) {
-			System.out.println(appointmentsList[i]);
 
 			String appointmentInFo = appointmentsList[i].getDoctorID() + " " + appointmentsList[i].getPatientID() + " "
 					+ appointmentsList[i].getDate();

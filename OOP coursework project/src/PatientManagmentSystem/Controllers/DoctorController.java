@@ -54,11 +54,12 @@ public class DoctorController {
 				allAppointmentsForSelectedPatient[i] = allAppointmentsList[i];
 			}
 
+			System.out.println(allAppointmentsForSelectedPatient[i]);
+
 			if (allAppointmentsForSelectedPatient.length < 4) {
 				allAppointmentsForSelectedPatient = java.util.Arrays.copyOf(allAppointmentsForSelectedPatient,
 						allAppointmentsForSelectedPatient.length + 5);
 			}
-			System.out.println(allAppointmentsForSelectedPatient[i]);
 		}
 
 		return allAppointmentsForSelectedPatient; // and return it
@@ -103,7 +104,7 @@ public class DoctorController {
 				JSONObject individualAppointment = readAppointments.getJSONObject(i);
 
 				Appointment nextAppointment = new Appointment(individualAppointment.getString("AppointmentDate"),
-						individualAppointment.getString("DoctorID"), individualAppointment.getString("PatientID"));
+						individualAppointment.getString("PatientID"), individualAppointment.getString("DoctorID"));
 
 				appointmentsList[i] = nextAppointment;
 
@@ -117,8 +118,8 @@ public class DoctorController {
 
 		JSONObject appointmentDetails = new JSONObject();
 		appointmentDetails.put("AppointmentDate", newAppointment.getDate());
-		appointmentDetails.put("DoctorID", newAppointment.getDoctorID());
 		appointmentDetails.put("PatientID", newAppointment.getPatientID());
+		appointmentDetails.put("DoctorID", newAppointment.getDoctorID());
 
 		JSONArray appointment = new JSONArray();
 		appointment.put(appointmentDetails);
