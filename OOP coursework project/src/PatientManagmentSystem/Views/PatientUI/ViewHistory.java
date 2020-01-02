@@ -86,7 +86,7 @@ public class ViewHistory extends JFrame {
 
 		Appointment[] appointmentsList = patientController.GetPatientHistory(patientID);
 
-		for (int i = 0; i < appointmentsList.length; i++) {
+		for (int i = 0; i < appointmentsList.length - 1; i++) {
 
 			String appointmentInFo = appointmentsList[i].getDoctorID() + " " + appointmentsList[i].getPatientID() + " "
 					+ appointmentsList[i].getDate();

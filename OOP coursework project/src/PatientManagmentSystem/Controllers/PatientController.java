@@ -31,10 +31,9 @@ public class PatientController {
 
 		Appointment[] allAppointmentsList = ReturnAppointmentsDetails();
 		Appointment[] allAppointmentsForSelectedPatient = new Appointment[5]; // set the array to a size of 5 and resize
-		System.out.println(allAppointmentsList.length); // accordingly
-
-		for (int i = 0; i < allAppointmentsList.length - 1; i++) {
-
+																				// accordingly
+		for (int i = 0; i == allAppointmentsList.length - 1; i++) {
+			System.out.println(allAppointmentsList[i]);
 			if (patientID.equals(allAppointmentsList[i].getPatientID())) {
 				// if the appointment we're currently looking at has the same id as the patient
 				// we want, store it in an array
@@ -45,6 +44,7 @@ public class PatientController {
 				allAppointmentsForSelectedPatient = java.util.Arrays.copyOf(allAppointmentsForSelectedPatient,
 						allAppointmentsForSelectedPatient.length + 5);
 			}
+		
 		}
 
 		return allAppointmentsForSelectedPatient; // and return it
