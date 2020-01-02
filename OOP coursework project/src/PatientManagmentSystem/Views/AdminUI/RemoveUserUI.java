@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
 public class RemoveUserUI extends JFrame {
 
@@ -62,9 +63,28 @@ public class RemoveUserUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
+				
+				
+				
 			}
 		});
-		btnRemoveUser.setBounds(46, 122, 139, 25);
+		btnRemoveUser.setBounds(45, 193, 139, 25);
 		contentPane.add(btnRemoveUser);
+		
+		JLabel lblUserType = new JLabel("User type");
+		lblUserType.setBounds(26, 108, 56, 16);
+		contentPane.add(lblUserType);
+		
+		JRadioButton rdbtnPatient = new JRadioButton("Patient");
+		rdbtnPatient.setBounds(253, 104, 127, 25);
+		contentPane.add(rdbtnPatient);
+		
+		JRadioButton rdbtnSecretary = new JRadioButton("Secretary");
+		rdbtnSecretary.setBounds(161, 104, 86, 25);
+		contentPane.add(rdbtnSecretary);
+		
+		JRadioButton rdbtnDoctor = new JRadioButton("Doctor");
+		rdbtnDoctor.setBounds(86, 104, 71, 25);
+		contentPane.add(rdbtnDoctor);
 	}
 }

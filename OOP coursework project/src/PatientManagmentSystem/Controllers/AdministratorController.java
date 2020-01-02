@@ -14,6 +14,7 @@ import PatientManagmentSystem.DataModel.DoctorFeedback;
 import PatientManagmentSystem.DataModel.PotentialUser;
 import PatientManagmentSystem.DataModel.AdministratorSystem.Administrator;
 import PatientManagmentSystem.DataModel.AdministratorSystem.UserFactory;
+import PatientManagmentSystem.DataModel.DoctorSystem.Doctor;
 
 public class AdministratorController {
 
@@ -30,10 +31,10 @@ public class AdministratorController {
 
 	}
 
-	public void RemoveUser(String userID) {
+	public void RemoveDoctor(String userID) {
 		
 		String outInfo = "";
-		try (BufferedReader reader = new BufferedReader(new FileReader("feedbackFile.json"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("doctorsFile.json"))) {
 			{
 				outInfo = reader.readLine();
 
@@ -42,23 +43,28 @@ public class AdministratorController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
 
-		JSONArray storedFeedback = new JSONArray(outInfo);
+		JSONArray storedUsers = new JSONArray(outInfo);
 
-		int length = storedFeedback.length();
-		DoctorFeedback[] readFeedback = new DoctorFeedback[storedFeedback.length()];
+		int length = storedUsers.length();
+		Doctor[] inDoctors = new Doctor[storedUsers.length()];
+
 		for (int i = 0; i < length; i++) {
 
-			JSONObject feedback = storedFeedback.getJSONObject(i);
+			JSONObject currentUser = storedUsers.getJSONObject(i);
 
-			DoctorFeedback current = new DoctorFeedback(feedback.getString("doctorID"), feedback.getInt("rating"),
-					feedback.getString("feedback"));
+			Doctor current = new Doctor(currentUser.getString("givenName"), currentUser.getString("surname"), currentUser.getString("uniqueID"), currentUser.getString("password"));
 
-			readFeedback[i] = current;
+			inDoctors[i] = current;
 
 		}
 		
+		
 	}
+	
+	
 	
 	public DoctorFeedback[] ReturnFeedbackDetails() {
 

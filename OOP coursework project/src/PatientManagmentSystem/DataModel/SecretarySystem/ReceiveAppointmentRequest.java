@@ -2,7 +2,6 @@ package PatientManagmentSystem.DataModel.SecretarySystem;
 
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
-import PatientManagmentSystem.Controllers.DoctorController;
 import PatientManagmentSystem.Controllers.SecretaryController;
 import PatientManagmentSystem.DataModel.Appointment;
 import PatientManagmentSystem.DataModel.DoctorSystem.Doctor;
@@ -20,26 +19,10 @@ public class ReceiveAppointmentRequest {
 
 	public static void ReceiveAppointmentRequest(String preferedDoctorID, String patientID, String[] preferedDates) {
 
-		Doctor[] allDoctors = secretaryController.ReturnDoctorDetails();
-		Appointment[] allApointments = secretaryController.ReturnAppointmentDetails();
+		int i = 0;
+		Appointment newAppointment = new Appointment(preferedDates[i], patientID, preferedDoctorID);
 
-		for (Doctor currentDoctor : allDoctors) {
-			if (preferedDoctorID == currentDoctor.getUniqueID()) { // if the preferred doctor
-				for (Appointment currentAppointment : allApointments) {
-					int i = 0;
-					if (preferedDates[i] != currentAppointment.getDate() || i < preferedDates.length) {
-						// and if one of the preferred dates are available
-						Appointment requestedAppointment = new Appointment(currentAppointment.getDate(),
-								preferedDoctorID, patientID); // create an appointment
-					//	secretaryController.StoreAppointmentDetails(requestedAppointment); doesnt work
-					} else {
-						i++;
-					}
-				}
-
-			}
-
-		}
+		secretaryController.StoreAppointmentDetails(newAppointment);
 
 	}
 

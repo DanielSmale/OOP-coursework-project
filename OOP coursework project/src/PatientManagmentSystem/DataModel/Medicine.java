@@ -5,6 +5,10 @@ public class Medicine {
 	private String medicineName;
 	private int stock;
 
+	public Medicine(String string, int int1) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getMedicineName() {
 		return medicineName;
 	}

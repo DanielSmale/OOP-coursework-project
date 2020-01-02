@@ -11,6 +11,9 @@ import org.json.JSONObject;
 
 import PatientManagmentSystem.DataModel.Appointment;
 import PatientManagmentSystem.DataModel.DoctorFeedback;
+import PatientManagmentSystem.DataModel.Medicine;
+import PatientManagmentSystem.DataModel.Note;
+import PatientManagmentSystem.DataModel.Prescription;
 import PatientManagmentSystem.DataModel.PatientSystem.AppointmentRequest;
 import PatientManagmentSystem.DataModel.PatientSystem.GiveFeedback;
 
@@ -91,18 +94,18 @@ public class PatientController {
 			e.printStackTrace();
 		}
 
-		JSONArray readAppointments = new JSONArray(outInfo);
+		JSONArray outAppointments = new JSONArray(outInfo);
 
-		Appointment[] appointmentsList = new Appointment[readAppointments.length()];
+		Appointment[] appointmentsList = new Appointment[outAppointments.length()];
 
-		if (readAppointments == null) {
+		if (outAppointments == null) {
 			System.out.println("JSON array empty");
 		} else {
-			int length = readAppointments.length();
+			int length = outAppointments.length();
 			System.out.println(length);
 			for (int i = 0; i < length - 1; i++) {
 
-				JSONObject individualAppointment = readAppointments.getJSONObject(i);
+				JSONObject individualAppointment = outAppointments.getJSONObject(i);
 
 				Appointment nextAppointment = new Appointment(individualAppointment.getString("AppointmentDate"),
 						individualAppointment.getString("PatientID"), individualAppointment.getString("DoctorID"));
@@ -113,6 +116,51 @@ public class PatientController {
 		}
 
 		return appointmentsList;
+	}
+
+	public Prescription[] ReturnPrescriptionDetails() {
+
+		String outInfo = "";
+		try (BufferedReader reader = new BufferedReader(new FileReader("prescriptionsFile.json"))) {
+			{
+				outInfo = reader.readLine();
+
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		JSONArray outPrescriptions = new JSONArray(outInfo);
+
+		Prescription[] prescriptionsList = new Prescription[outPrescriptions.length()];
+
+		if (outPrescriptions == null) {
+			System.out.println("JSON array empty");
+		} else {
+			int length = outPrescriptions.length();
+			for (int i = 0; i < length; i++) {
+
+				JSONObject individualPrescription = outPrescriptions.getJSONObject(i);
+
+				JSONObject outMedicine = (JSONObject) individualPrescription.get("medicine");
+				Medicine attachedMedicine = new Medicine(outMedicine.getString("medicineName"),
+						outMedicine.getInt("stock"));
+
+				JSONObject outNote = (JSONObject) individualPrescription.get("note");
+
+				Note attachedNote = new Note(outNote.getString("noteString"));
+
+				Prescription nextPrescription = new Prescription(individualPrescription.getString("doctorID"),
+						individualPrescription.getString("patientID"), attachedNote, attachedMedicine,
+						individualPrescription.getInt("quantity"), individualPrescription.getDouble("dosage"));
+
+				prescriptionsList[i] = nextPrescription;
+
+			}
+		}
+
+		return prescriptionsList;
 	}
 
 }

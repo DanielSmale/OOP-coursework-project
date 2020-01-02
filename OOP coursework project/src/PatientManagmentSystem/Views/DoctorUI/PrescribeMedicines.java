@@ -119,7 +119,16 @@ public class PrescribeMedicines extends JFrame {
 				DoctorController doctorController = new DoctorController();
 				doctorController.CreateNewPrescription(doctorIDTxt.getText(), patientIDTxt.getText(),
 						notesTextArea.getText(), medicineNameTxt.getText(), quantity, dosage);
+
+				// now clear the text boxes ready for next time
+				doctorIDTxt.setText("");
+				patientIDTxt.setText("");
+				medicineNameTxt.setText("");
+				quantityTxt.setText("");
+				dosageTxt.setText("");
+				notesTextArea.setText("");
 			}
+
 		});
 		btnSubmit.setBounds(145, 376, 97, 25);
 		contentPane.add(btnSubmit);

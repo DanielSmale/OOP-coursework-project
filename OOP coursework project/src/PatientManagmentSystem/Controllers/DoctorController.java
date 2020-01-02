@@ -20,6 +20,8 @@ import javafx.collections.ArrayChangeListener;
 
 import org.json.*;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 public class DoctorController {
 	File appointmentsFile = new File("appointmentsFile.json");
 	private boolean appendToFile = true;
@@ -65,15 +67,18 @@ public class DoctorController {
 		return allAppointmentsForSelectedPatient; // and return it
 	}
 
-	public void CreateNewPrescription(String doctorID, String patientID, String doctorNotes, String medicine,
+	public void CreateNewPrescription(String doctorID, String patientID, String doctorNotes, String medicineString,
 			int quantity, double dosage) {
 
 		Note newNote = new Note(doctorNotes);
-		Medicine newMedicine = new Medicine();
+		Medicine newMedicine = new Medicine(medicineString, quantity);
 
 		PrescribeMedicines prescribeMedicine = new PrescribeMedicines();
 		Prescription newPrescription = prescribeMedicine.NewPrescription(doctorID, patientID, newNote, newMedicine,
 				quantity, dosage);
+
+		System.out.println(newPrescription.getMedicine());
+		System.out.println(newPrescription.getMedicine().getMedicineName());
 
 		StorePrescriptionDetails(newPrescription);
 	}
@@ -164,7 +169,7 @@ public class DoctorController {
 		System.out.printf("File is located at %s%n", notesFile.getAbsolutePath());
 	}
 
-	private void StorePrescriptionDetails(Prescription prescriptionToRecord) {
+	public void StorePrescriptionDetails(Prescription prescriptionToRecord) {
 
 		JSONObject prescriptionDetails = new JSONObject();
 		prescriptionDetails.put("doctorID", prescriptionToRecord.getDoctorID());
@@ -178,7 +183,15 @@ public class DoctorController {
 
 		JSONObject medicine = new JSONObject();
 		medicine.put("medicineName", prescriptionToRecord.getMedicine().getMedicineName());
+				
+		
+		System.out.println(prescriptionToRecord.getMedicine().getMedicineName());
+		
+		
+		System.out.println(medicine.toString());
+		System.out.println(medicine.getString("medicineName"));
 
+		
 		prescriptionDetails.put("medicine", medicine);
 
 		prescriptionDetails.put("quantity", prescriptionToRecord.getQuantity());
@@ -186,8 +199,8 @@ public class DoctorController {
 
 		File prescriptionFile = new File("prescriptionsFile.json");
 
-		JSONObject prescription = new JSONObject();
-		prescription.put("Prescription", prescriptionDetails);
+		JSONArray prescription = new JSONArray();
+		prescription.put(prescriptionDetails);
 
 		try (FileWriter writer = new FileWriter(prescriptionFile, appendToFile)) {
 			{
