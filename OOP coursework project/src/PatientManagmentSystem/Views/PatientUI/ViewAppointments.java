@@ -67,9 +67,10 @@ public class ViewAppointments extends JFrame {
 		Appointment[] appointmentsList = patientController.ReturnAppointmentsDetails();
 
 		for (int i = 0; i < appointmentsList.length; i++) {
-
+			
 			String appointmentInFo = appointmentsList[i].getDoctorID() + " " + appointmentsList[i].getPatientID() + " "
 					+ appointmentsList[i].getDate();
+			System.out.println(appointmentInFo);
 
 			appointmentsDataListModel.addElement(appointmentInFo);
 		}

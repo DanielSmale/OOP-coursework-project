@@ -1,17 +1,24 @@
 package PatientManagmentSystem.Controllers;
 
 import PatientManagmentSystem.DataModel.Appointment;
+import PatientManagmentSystem.DataModel.MainClass;
 import PatientManagmentSystem.DataModel.Medicine;
+
 import PatientManagmentSystem.DataModel.Note;
+
 import PatientManagmentSystem.DataModel.Prescription;
 import PatientManagmentSystem.DataModel.DoctorSystem.CreateAppointment;
 import jdk.nashorn.internal.parser.JSONParser;
 
 import java.io.BufferedReader;
+
 import java.io.File;
+
 import java.io.FileReader;
+
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.net.IDN;
 import java.util.ArrayList;
 
@@ -45,8 +52,9 @@ public class DoctorController {
 	public Appointment[] GetPatientHistory(String patientID) {
 
 		Appointment[] allAppointmentsList = ReturnAppointmentsDetails();
-		Appointment[] allAppointmentsForSelectedPatient = new Appointment[5]; // set the array to a size of 5 and resize
-																				// accordingly
+		Appointment[] allAppointmentsForSelectedPatient = new Appointment[5];
+		// set the array to a size of 5 and resize
+		// accordingly
 
 		for (int i = 0; i < allAppointmentsList.length - 1; i++) {
 
@@ -77,8 +85,8 @@ public class DoctorController {
 		Prescription newPrescription = prescribeMedicine.NewPrescription(doctorID, patientID, newNote, newMedicine,
 				quantity, dosage);
 
-		System.out.println(newPrescription.getMedicine());
-		System.out.println(newPrescription.getMedicine().getMedicineName());
+
+
 
 		StorePrescriptionDetails(newPrescription);
 	}
@@ -126,13 +134,15 @@ public class DoctorController {
 		appointmentDetails.put("PatientID", newAppointment.getPatientID());
 		appointmentDetails.put("DoctorID", newAppointment.getDoctorID());
 
-		JSONArray appointment = new JSONArray();
-		appointment.put(appointmentDetails);
+		JSONArray appointments = new JSONArray();
+		appointments.put(appointmentDetails);
+
+		JSONArray readAppointments = MainClass.readAppointments;
 
 		try (FileWriter writer = new FileWriter(appointmentsFile, appendToFile)) {
 			{
-				writer.write(appointment.toString());
-
+				writer.write(appointments.toString());
+				writer.flush();
 				writer.close();
 			}
 		} catch (IOException e) {
@@ -160,6 +170,7 @@ public class DoctorController {
 		try (FileWriter writer = new FileWriter(notesFile, appendToFile)) {
 			{
 				writer.write(note.toString());
+				writer.flush();
 
 				writer.close();
 			}
@@ -183,15 +194,12 @@ public class DoctorController {
 
 		JSONObject medicine = new JSONObject();
 		medicine.put("medicineName", prescriptionToRecord.getMedicine().getMedicineName());
-				
-		
+
 		System.out.println(prescriptionToRecord.getMedicine().getMedicineName());
-		
-		
+
 		System.out.println(medicine.toString());
 		System.out.println(medicine.getString("medicineName"));
 
-		
 		prescriptionDetails.put("medicine", medicine);
 
 		prescriptionDetails.put("quantity", prescriptionToRecord.getQuantity());
@@ -205,6 +213,7 @@ public class DoctorController {
 		try (FileWriter writer = new FileWriter(prescriptionFile, appendToFile)) {
 			{
 				writer.write(prescription.toString());
+				writer.flush();
 
 				writer.close();
 			}

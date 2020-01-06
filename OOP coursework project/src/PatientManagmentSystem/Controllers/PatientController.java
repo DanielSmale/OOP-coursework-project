@@ -44,7 +44,7 @@ public class PatientController {
 				allAppointmentsForSelectedPatient = java.util.Arrays.copyOf(allAppointmentsForSelectedPatient,
 						allAppointmentsForSelectedPatient.length + 5);
 			}
-		
+
 		}
 
 		return allAppointmentsForSelectedPatient; // and return it
@@ -72,6 +72,7 @@ public class PatientController {
 		try (FileWriter writer = new FileWriter(feedbackFile, appendToFile)) {
 			{
 				writer.write(storedFeedback.toString());
+				writer.flush();
 
 				writer.close();
 			}
@@ -81,20 +82,21 @@ public class PatientController {
 		System.out.printf("File is located at %s%n", feedbackFile.getAbsolutePath());
 	}
 
+	JSONArray outAppointments = new JSONArray();
+
 	public Appointment[] ReturnAppointmentsDetails() {
 
 		String outInfo = "";
 		try (BufferedReader reader = new BufferedReader(new FileReader("appointmentsFile.json"))) {
 			{
 				outInfo = reader.readLine();
+				outAppointments.put(outInfo);
 
 				reader.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		JSONArray outAppointments = new JSONArray(outInfo);
 
 		Appointment[] appointmentsList = new Appointment[outAppointments.length()];
 
@@ -103,7 +105,7 @@ public class PatientController {
 		} else {
 			int length = outAppointments.length();
 			System.out.println(length);
-			for (int i = 0; i < length - 1; i++) {
+			for (int i = 0; i < length; i++) {
 
 				JSONObject individualAppointment = outAppointments.getJSONObject(i);
 
@@ -112,6 +114,8 @@ public class PatientController {
 
 				appointmentsList[i] = nextAppointment;
 
+				System.out.println(nextAppointment.getDoctorID() + " " + nextAppointment.getPatientID() + " "
+						+ nextAppointment.getDate());
 			}
 		}
 
@@ -151,9 +155,9 @@ public class PatientController {
 
 				Note attachedNote = new Note(outNote.getString("noteString"));
 
-				Prescription nextPrescription = new Prescription(individualPrescription.getString("doctorID"),
+				Prescription nextPrescription = new Prescription.Builder(individualPrescription.getString("doctorID"),
 						individualPrescription.getString("patientID"), attachedNote, attachedMedicine,
-						individualPrescription.getInt("quantity"), individualPrescription.getDouble("dosage"));
+						individualPrescription.getInt("quantity"), individualPrescription.getDouble("dosage")).Build();
 
 				prescriptionsList[i] = nextPrescription;
 

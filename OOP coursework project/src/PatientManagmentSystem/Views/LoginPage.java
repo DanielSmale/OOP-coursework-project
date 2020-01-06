@@ -107,7 +107,7 @@ public class LoginPage extends JFrame {
 
 					AdministratorController administratorController = new AdministratorController();
 
-					administratorController.StoreAdministratorDetails(systemAdministrator);
+					administratorController.StoreAdministratorDetails(systemAdministrator,true);
 
 					dispose();
 					adminMainPage.setVisible(true); // and take them to their administrator page

@@ -5,7 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,6 +16,10 @@ import PatientManagmentSystem.DataModel.PotentialUser;
 import PatientManagmentSystem.DataModel.AdministratorSystem.Administrator;
 import PatientManagmentSystem.DataModel.AdministratorSystem.UserFactory;
 import PatientManagmentSystem.DataModel.DoctorSystem.Doctor;
+import PatientManagmentSystem.DataModel.PatientSystem.Patient;
+import PatientManagmentSystem.DataModel.SecretarySystem.Secretary;
+import sun.print.resources.serviceui;
+import sun.security.util.ArrayUtil;
 
 public class AdministratorController {
 
@@ -31,8 +36,9 @@ public class AdministratorController {
 
 	}
 
-	public void RemoveDoctor(String userID) {
-		
+	public void RemoveDoctor(String IDtoRemove) {
+
+		// Read all the data in
 		String outInfo = "";
 		try (BufferedReader reader = new BufferedReader(new FileReader("doctorsFile.json"))) {
 			{
@@ -43,9 +49,8 @@ public class AdministratorController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 
+		// De-serialise it
 		JSONArray storedUsers = new JSONArray(outInfo);
 
 		int length = storedUsers.length();
@@ -55,17 +60,129 @@ public class AdministratorController {
 
 			JSONObject currentUser = storedUsers.getJSONObject(i);
 
-			Doctor current = new Doctor(currentUser.getString("givenName"), currentUser.getString("surname"), currentUser.getString("uniqueID"), currentUser.getString("password"));
+			Doctor current = new Doctor(currentUser.getString("givenName"), currentUser.getString("surname"),
+					currentUser.getString("uniqueID"), currentUser.getString("password"));
 
 			inDoctors[i] = current;
 
 		}
-		
-		
+
+		// Iterate through the users and remove the selected one based on their ID
+
+		for (int i = 0; i < inDoctors.length; i++) {
+
+			if (inDoctors[i].getUniqueID() != IDtoRemove) { // if its not the user we want to remove
+
+				inDoctors[i] = inDoctors[i]; // this will drop the old user from the array of users
+
+			}
+		}
+
+		// now store it again
+		for (int i = 0; i < inDoctors.length; i++) {
+
+			StoreDoctorDetails(inDoctors[i],false);
+		}
 	}
-	
-	
-	
+
+	public void RemovePatient(String IDtoRemove) {
+
+		// Read all the data in
+		String outInfo = "";
+		try (BufferedReader reader = new BufferedReader(new FileReader("patientsFile.json"))) {
+			{
+				outInfo = reader.readLine();
+
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// De-serialise it
+		JSONArray storedUsers = new JSONArray(outInfo);
+
+		int length = storedUsers.length();
+		Patient[] inPatients = new Patient[storedUsers.length()];
+
+		for (int i = 0; i < length; i++) {
+
+			JSONObject currentUser = storedUsers.getJSONObject(i);
+
+			Patient current = new Patient(currentUser.getString("givenName"), currentUser.getString("surname"),
+					currentUser.getString("uniqueID"), currentUser.getString("password"));
+
+			inPatients[i] = current;
+
+		}
+
+		// Iterate through the users and remove the selected one based on their ID
+
+		for (int i = 0; i < inPatients.length; i++) {
+
+			if (inPatients[i].getUniqueID() != IDtoRemove) { // if its not the user we want to remove
+
+				inPatients[i] = inPatients[i]; // this will drop the old user from the array of users
+
+			}
+		}
+
+		// now store it again
+		for (int i = 0; i < inPatients.length; i++) {
+
+			StorePatientDetails(inPatients[i],false);
+		}
+	}
+
+	public void RemoveSecretary(String IDtoRemove) {
+
+		// Read all the data in
+		String outInfo = "";
+		try (BufferedReader reader = new BufferedReader(new FileReader("secretarysFile.json"))) {
+			{
+				outInfo = reader.readLine();
+
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// De-serialise it
+		JSONArray storedUsers = new JSONArray(outInfo);
+
+		int length = storedUsers.length();
+		Secretary[] inSecretarys = new Secretary[storedUsers.length()];
+
+		for (int i = 0; i < length; i++) {
+
+			JSONObject currentUser = storedUsers.getJSONObject(i);
+
+			Secretary current = new Secretary(currentUser.getString("givenName"), currentUser.getString("surname"),
+					currentUser.getString("uniqueID"), currentUser.getString("password"));
+
+			inSecretarys[i] = current;
+
+		}
+
+		// Iterate through the users and remove the selected one based on their ID
+
+		for (int i = 0; i < inSecretarys.length; i++) {
+
+			if (inSecretarys[i].getUniqueID() != IDtoRemove) { // if its not the user we want to remove
+
+				inSecretarys[i] = inSecretarys[i]; // this will drop the old user from the array of users
+
+			}
+		}
+
+		// now store it again
+		for (int i = 0; i < inSecretarys.length; i++) {
+
+			StoreSecretaryDetails(inSecretarys[i],false);
+		}
+	}
+
 	public DoctorFeedback[] ReturnFeedbackDetails() {
 
 		String outInfo = "";
@@ -112,6 +229,7 @@ public class AdministratorController {
 		try (FileWriter writer = new FileWriter(edittedFeedbackFile, appendToFile)) {
 			{
 				writer.write(storedFeedback.toString());
+				writer.flush();
 
 				writer.close();
 			}
@@ -120,9 +238,8 @@ public class AdministratorController {
 		}
 		System.out.printf("File is located at %s%n", edittedFeedbackFile.getAbsolutePath());
 	}
-	
-	
-	public void StoreDoctorDetails(AbstractUser doctorToStore) {
+
+	public void StoreDoctorDetails(AbstractUser doctorToStore, boolean appendToFile) {
 		File doctorsFile = new File("doctorsFile.json");
 
 		JSONObject doctorDetails = new JSONObject();
@@ -131,12 +248,13 @@ public class AdministratorController {
 		doctorDetails.put("uniqueID", doctorToStore.getUniqueID());
 		doctorDetails.put("password", doctorToStore.getPassword());
 
-		JSONObject doctor = new JSONObject();
-		doctor.put("Doctor", doctorDetails);
+		JSONArray doctor = new JSONArray();
+		doctor.put(doctorDetails);
 
 		try (FileWriter writer = new FileWriter(doctorsFile, appendToFile)) {
 			{
 				writer.write(doctor.toString());
+				writer.flush();
 
 				writer.close();
 			}
@@ -146,8 +264,8 @@ public class AdministratorController {
 		System.out.printf("File is located at %s%n", doctorsFile.getAbsolutePath());
 	}
 
-	public void StoreSecretaryDetails(AbstractUser secretaryToStore) {
-		File secretarysFile = new File("secretaryFile.json");
+	public void StoreSecretaryDetails(AbstractUser secretaryToStore, boolean appendToFile) {
+		File secretarysFile = new File("secretarysFile.json");
 
 		JSONObject secretaryDetails = new JSONObject();
 		secretaryDetails.put("givenName", secretaryToStore.getGivenName());
@@ -155,12 +273,13 @@ public class AdministratorController {
 		secretaryDetails.put("uniqueID", secretaryToStore.getUniqueID());
 		secretaryDetails.put("password", secretaryToStore.getPassword());
 
-		JSONObject secretary = new JSONObject();
-		secretary.put("Secretary", secretaryDetails);
+		JSONArray secretary = new JSONArray();
+		secretary.put(secretaryDetails);
 
 		try (FileWriter writer = new FileWriter(secretarysFile, appendToFile)) {
 			{
 				writer.write(secretary.toString());
+				writer.flush();
 
 				writer.close();
 			}
@@ -170,7 +289,7 @@ public class AdministratorController {
 		System.out.printf("File is located at %s%n", secretarysFile.getAbsolutePath());
 	}
 
-	public void StorePatientDetails(AbstractUser patientToStore) {
+	public void StorePatientDetails(AbstractUser patientToStore, boolean appendToFile) {
 		File patientFile = new File("patientsFile.json");
 
 		JSONObject patientDetails = new JSONObject();
@@ -179,12 +298,13 @@ public class AdministratorController {
 		patientDetails.put("uniqueID", patientToStore.getUniqueID());
 		patientDetails.put("password", patientToStore.getPassword());
 
-		JSONObject secretary = new JSONObject();
-		secretary.put("Patient", patientDetails);
+		JSONArray patient = new JSONArray();
+		patient.put(patientDetails);
 
 		try (FileWriter writer = new FileWriter(patientFile, appendToFile)) {
 			{
-				writer.write(secretary.toString());
+				writer.write(patient.toString());
+				writer.flush();
 
 				writer.close();
 			}
@@ -194,7 +314,7 @@ public class AdministratorController {
 		System.out.printf("File is located at %s%n", patientFile.getAbsolutePath());
 	}
 
-	public void StoreAdministratorDetails(Administrator administratorToStore) {
+	public void StoreAdministratorDetails(Administrator administratorToStore, boolean appendToFile) {
 		File administratorFile = new File("administratorFile.json");
 
 		JSONObject administratorDetails = new JSONObject();
@@ -209,6 +329,7 @@ public class AdministratorController {
 		try (FileWriter writer = new FileWriter(administratorFile, appendToFile)) {
 			{
 				writer.write(administrator.toString());
+				writer.flush();
 
 				writer.close();
 			}

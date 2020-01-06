@@ -17,15 +17,15 @@ public class UserFactory implements IFactory {
 		switch (userType) {
 		case "Doctor":
 			user = new Doctor(givenName, surname, uniqueID, password);
-			administratorController.StoreDoctorDetails(user);
+			administratorController.StoreDoctorDetails(user,true);
 			break;
 		case "Secretary":
 			user = new Secretary(givenName, surname, uniqueID, password);
-			administratorController.StoreSecretaryDetails(user);
+			administratorController.StoreSecretaryDetails(user,true);
 			break;
 		case "Patient":
 			user = new Patient(givenName, surname, uniqueID, password);
-			administratorController.StorePatientDetails(user);
+			administratorController.StorePatientDetails(user,true);
 			break;
 		default:
 			user = null;

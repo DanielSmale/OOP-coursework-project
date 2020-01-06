@@ -15,6 +15,14 @@ import PatientManagmentSystem.DataModel.DoctorSystem.Doctor;
 public class SecretaryController {
 	private boolean appendToFile = true;
 
+	
+	public void GiveMedicines() {
+		
+		
+		
+	}
+	
+	
 	public Doctor[] ReturnDoctorDetails() {
 		// Return the all the doctors details and try and match up
 		// a free doctor to a patient
@@ -77,6 +85,7 @@ public class SecretaryController {
 		try (FileWriter writer = new FileWriter(appointmentsFile, appendToFile)) {
 			{
 				writer.write(appointment.toString());
+				writer.flush();
 
 				writer.close();
 			}
