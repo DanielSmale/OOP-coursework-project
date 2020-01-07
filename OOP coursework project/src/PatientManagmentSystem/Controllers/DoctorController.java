@@ -102,8 +102,10 @@ public class DoctorController {
 			e.printStackTrace();
 		}
 
-		JSONArray readAppointments = new JSONArray(outInfo);
+// this is a problem need to make the array on start up
 
+		JSONArray readAppointments = MainClass.readAppointments;
+		
 		Appointment[] appointmentsList = new Appointment[readAppointments.length()];
 
 		if (readAppointments == null) {

@@ -3,5 +3,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="OOP coursework project/src"/>
 	<classpathentry kind="lib" path="Lib/JSON.jar" sourcepath="Lib/JSON.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="OOP coursework project/bin"/>
 </classpath>

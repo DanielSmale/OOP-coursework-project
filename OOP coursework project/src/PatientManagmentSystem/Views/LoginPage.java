@@ -102,18 +102,18 @@ public class LoginPage extends JFrame {
 				String password = passwordTxt.getText();
 
 				AdminMainPage adminMainPage = new AdminMainPage(); // create the administrator page
-				if (uniqueIDValue.equals("A1")) { 
+				if (uniqueIDValue.equals("A1")) {
 					Administrator systemAdministrator = new Administrator(givenName, surname, uniqueIDValue, password);
 
 					AdministratorController administratorController = new AdministratorController();
 
-					administratorController.StoreAdministratorDetails(systemAdministrator,true);
+					administratorController.StoreAdministratorDetails(systemAdministrator, true);
 
 					dispose();
 					adminMainPage.setVisible(true); // and take them to their administrator page
 				}
 
-				givenNameTxt.setText("");
+				givenNameTxt.setText(""); // reset them after
 				surnameTxt.setText("");
 				uniqueIDTxt.setText("");
 				passwordTxt.setText("");
