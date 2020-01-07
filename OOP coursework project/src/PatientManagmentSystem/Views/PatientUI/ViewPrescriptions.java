@@ -86,7 +86,7 @@ public class ViewPrescriptions extends JFrame {
 
 	private DefaultListModel<String> SetListsData() {
 
-		DefaultListModel<String> appointmentsDataListModel = new DefaultListModel<String>();
+		DefaultListModel<String> prescriptionsDataListModel = new DefaultListModel<String>();
 
 		Prescription[] prescriptionList = patientController.ReturnPrescriptionDetails();
 
@@ -96,8 +96,8 @@ public class ViewPrescriptions extends JFrame {
 					+ prescriptionList[i].getDoctorNote() + " " + prescriptionList[i].getMedicine() + " "
 					+ prescriptionList[i].getQuantity() + " " + prescriptionList[i].getDosage();
 
-			appointmentsDataListModel.addElement(appointmentInFo);
+			prescriptionsDataListModel.addElement(appointmentInFo);
 		}
-		return appointmentsDataListModel;
+		return prescriptionsDataListModel;
 	}
 }

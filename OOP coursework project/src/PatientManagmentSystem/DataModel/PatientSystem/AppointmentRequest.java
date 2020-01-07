@@ -7,8 +7,8 @@ public class AppointmentRequest {
 	// and a range of
 	// potential dates.
 
-	String PreferredDoctorID;
-	String[] PreferedDates;
+	private String PreferredDoctorID;
+	private String[] PreferedDates;
 
 	public void AppointmentRequest(String preferedDoctorID, String patientID, String[] preferedDates) {
 

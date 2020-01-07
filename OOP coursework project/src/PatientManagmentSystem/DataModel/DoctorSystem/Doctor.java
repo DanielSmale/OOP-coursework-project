@@ -11,4 +11,6 @@ public class Doctor extends AbstractUser {
 
 	}
 
+	
+	
 }

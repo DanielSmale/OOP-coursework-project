@@ -93,6 +93,7 @@ public class ViewPatientHistory extends JFrame {
 
 			appointmentsDataListModel.addElement(appointmentInFo);
 		}
+
 		return appointmentsDataListModel;
 
 	}

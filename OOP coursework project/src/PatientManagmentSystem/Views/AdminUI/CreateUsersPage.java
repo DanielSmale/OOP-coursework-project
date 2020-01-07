@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 
 public class CreateUsersPage extends JFrame {
-	AdministratorController administratorController = new AdministratorController();
+	private AdministratorController administratorController = new AdministratorController();
 
 	private JPanel contentPane;
 	private JTextField givenNameTxt;

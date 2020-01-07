@@ -1,4 +1,4 @@
-package PatientManagmentSystem.DataModel.SecretarySystem;
++package PatientManagmentSystem.DataModel.SecretarySystem;
 
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 

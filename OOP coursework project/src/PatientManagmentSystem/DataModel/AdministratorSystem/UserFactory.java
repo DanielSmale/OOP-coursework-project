@@ -8,7 +8,7 @@ import PatientManagmentSystem.DataModel.PatientSystem.Patient;
 import PatientManagmentSystem.DataModel.SecretarySystem.Secretary;
 
 public class UserFactory implements IFactory {
-	AdministratorController administratorController = new AdministratorController();
+	private AdministratorController administratorController = new AdministratorController();
 
 	public AbstractUser CreateUser(String givenName, String surname, String uniqueID, String password,
 			String userType) {

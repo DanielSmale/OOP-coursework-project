@@ -8,6 +8,7 @@ import PatientManagmentSystem.DataModel.Note;
 
 import PatientManagmentSystem.DataModel.Prescription;
 import PatientManagmentSystem.DataModel.DoctorSystem.CreateAppointment;
+import PatientManagmentSystem.DataModel.DoctorSystem.MakesNotes;
 import jdk.nashorn.internal.parser.JSONParser;
 
 import java.io.BufferedReader;
@@ -85,9 +86,6 @@ public class DoctorController {
 		Prescription newPrescription = prescribeMedicine.NewPrescription(doctorID, patientID, newNote, newMedicine,
 				quantity, dosage);
 
-
-
-
 		StorePrescriptionDetails(newPrescription);
 	}
 
@@ -120,7 +118,6 @@ public class DoctorController {
 						individualAppointment.getString("PatientID"), individualAppointment.getString("DoctorID"));
 
 				appointmentsList[i] = nextAppointment;
-
 			}
 		}
 

@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 
 public class ViewAppointments extends JFrame {
-	PatientController patientController = new PatientController();
+	private PatientController patientController = new PatientController();
 
 	private JPanel contentPane;
 

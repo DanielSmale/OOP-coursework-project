@@ -18,6 +18,8 @@ import javax.swing.JTextArea;
 
 public class PrescribeMedicines extends JFrame {
 
+	DoctorController doctorController = new DoctorController();
+
 	private JPanel contentPane;
 	private JTextField doctorIDTxt;
 	private JTextField patientIDTxt;
@@ -116,7 +118,6 @@ public class PrescribeMedicines extends JFrame {
 				int quantity = Integer.parseInt(quantityTxt.getText());
 				double dosage = Double.parseDouble(dosageTxt.getText());
 
-				DoctorController doctorController = new DoctorController();
 				doctorController.CreateNewPrescription(doctorIDTxt.getText(), patientIDTxt.getText(),
 						notesTextArea.getText(), medicineNameTxt.getText(), quantity, dosage);
 
