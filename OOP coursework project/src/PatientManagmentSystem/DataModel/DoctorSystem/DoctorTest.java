@@ -1,11 +1,12 @@
-package PatientManagmentSystem.DataModel.PatientSystem;
+package PatientManagmentSystem.DataModel.DoctorSystem;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class PatientTest {
-	Patient test = new Patient("test", "test", "T1", "Testing", 100, "Other", "Test road, Testland");
+class DoctorTest {
+
+	Doctor test = new Doctor("test", "test", "T1", "Testing");
 
 	@Test
 	void testGetGivenName() {
@@ -58,43 +59,4 @@ class PatientTest {
 		test.setUniqueID("Tester");
 		assertEquals("Tester", test.getPassword());
 	}
-
-	@Test
-	void testGetAge() {
-		assertEquals(100, test.getAge());
-	}
-
-	@Test
-	void testSetAge() {
-		test.setAge(1000);
-
-		assertEquals(1000, test.getAge());
-
-	}
-
-	@Test
-	void testGetGender() {
-		assertEquals("Other", test.getGender());
-	}
-
-	@Test
-	void testSetGender() {
-
-		test.setGender("testCase");
-
-		assertEquals("testCase", test.getGender());
-	}
-
-	@Test
-	void testGetAddress() {
-		assertEquals("Test road, Testland", test.getAddress());
-	}
-
-	@Test
-	void testSetAddress() {
-		test.setAddress("Java lane");
-
-		assertEquals("Java lane", test.getAddress());
-	}
-
 }

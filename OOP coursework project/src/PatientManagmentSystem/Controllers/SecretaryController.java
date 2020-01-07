@@ -15,14 +15,11 @@ import PatientManagmentSystem.DataModel.DoctorSystem.Doctor;
 public class SecretaryController {
 	private boolean appendToFile = true;
 
-	
-	public void GiveMedicines() {
-		
-		
+	public void ReceiveAccountRequest() {
+
 		
 	}
-	
-	
+
 	public Doctor[] ReturnDoctorDetails() {
 		// Return the all the doctors details and try and match up
 		// a free doctor to a patient
