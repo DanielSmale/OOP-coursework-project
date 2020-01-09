@@ -1,0 +1,1 @@
+Not enough GUIs built for build to work. User cannot navagate to all their functionality currently.
