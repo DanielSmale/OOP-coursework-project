@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import PatientManagmentSystem.Controllers.AdministratorController;
+import PatientManagmentSystem.DataModel.AbstractUser;
+import PatientManagmentSystem.DataModel.ReturnAllUsers;
 import PatientManagmentSystem.DataModel.AdministratorSystem.Administrator;
 import PatientManagmentSystem.Views.AdminUI.AdminMainPage;
 
@@ -18,9 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class LoginPage extends JFrame {
-public boolean succussfulLogin = false;
-	
-	
+	public boolean succussfulLogin = false;
+
 	private JPanel contentPane;
 	private JTextField givenNameTxt;
 	private JTextField surnameTxt;
@@ -115,11 +116,15 @@ public boolean succussfulLogin = false;
 					adminMainPage.setVisible(true); // and take them to their administrator page
 				}
 
-				//if(givenName && password == to one of the all users let them login
-				
-				
-				
-				
+				AbstractUser[] allUsers = ReturnAllUsers.getInstance().ReturnUsers();
+
+				for (int i = 0; i < allUsers.length - 1; i++) {
+					if (givenName == allUsers[i].getGivenName() && surname == allUsers[i].getSurname()
+							&& password == allUsers[i].getPassword()) {
+						succussfulLogin = true;
+					}
+				}
+
 				givenNameTxt.setText(""); // reset them after
 				surnameTxt.setText("");
 				uniqueIDTxt.setText("");

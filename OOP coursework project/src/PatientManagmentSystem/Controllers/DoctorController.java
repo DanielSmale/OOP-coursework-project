@@ -103,7 +103,7 @@ public class DoctorController {
 		}
 
 		JSONArray readAppointments = MainClass.readAppointments;
-		
+
 		Appointment[] appointmentsList = new Appointment[readAppointments.length()];
 
 		if (readAppointments == null) {

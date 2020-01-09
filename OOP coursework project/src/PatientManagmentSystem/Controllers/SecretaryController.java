@@ -10,14 +10,18 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import PatientManagmentSystem.DataModel.Appointment;
+import PatientManagmentSystem.DataModel.PotentialUser;
 import PatientManagmentSystem.DataModel.DoctorSystem.Doctor;
 
 public class SecretaryController {
 	private boolean appendToFile = true;
 
-	public void ReceiveAccountRequest() {
+	public void ReceiveAccountRequest(String givenName, String surname, String uniqueID, String password,
+			String userType) {
 
-		
+		PotentialUser potentialUser = new PotentialUser(givenName, surname, uniqueID, password, userType);
+
+		AdministratorController.getInstance().ReceivePotentialUserDetails(potentialUser);
 	}
 
 	public Doctor[] ReturnDoctorDetails() {

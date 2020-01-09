@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import PatientManagmentSystem.Controllers.SecretaryController;
+import PatientManagmentSystem.DataModel.PotentialUser;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -13,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AccountRequestGUI extends JFrame {
+	SecretaryController secretaryController = new SecretaryController();
 
 	private JPanel contentPane;
 	private JTextField givenNametextField;
@@ -96,6 +101,9 @@ public class AccountRequestGUI extends JFrame {
 				String uniqueIDValue = uniqueIDTextField.getText();
 				String password = passwordTextField.getText();
 
+				PotentialUser potentialUser = new PotentialUser(givenName, surname, uniqueIDValue, password, "Patient");
+
+				secretaryController.ReceiveAccountRequest(givenName, surname, uniqueIDValue, password, "Patient");
 			}
 		});
 		btnEnter.setBounds(103, 179, 97, 25);

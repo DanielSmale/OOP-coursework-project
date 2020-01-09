@@ -23,7 +23,6 @@ import sun.security.util.ArrayUtil;
 
 public class AdministratorController {
 	private static AdministratorController instance;
-
 	// An implementation of the singleton pattern
 
 	private void AdministratorController() {
@@ -44,11 +43,19 @@ public class AdministratorController {
 
 	public void ReceivePotentialUserDetails(String givenName, String surname, String uniqueID, String password,
 			String userType) {
-// Called from the administrators create users GUI. This method takes the provided data and passes it on to the userFactory to decide which user to add
+		// Called from the administrators create users GUI. This method takes the
+		// provided data and passes it on to the userFactory to decide which user to add
 		UserFactory userFactory = new UserFactory();
 
 		userFactory.CreateUser(givenName, surname, uniqueID, password, userType);
+	}
 
+	public void ReceivePotentialUserDetails(PotentialUser potentialUser) {
+		// Called from the administrators create users GUI. This method takes the
+		// provided data and passes it on to the userFactory to decide which user to add
+		UserFactory userFactory = new UserFactory();
+
+		userFactory.CreateUser(potentialUser);
 	}
 
 	public void RemoveDoctor(String IDtoRemove) {
