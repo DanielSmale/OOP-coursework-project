@@ -126,7 +126,7 @@ public class DoctorController {
 		return appointmentsList;
 	}
 
-	private void StoreAppointmentDetails(Appointment newAppointment) {
+	public void StoreAppointmentDetails(Appointment newAppointment) {
 
 		JSONObject appointmentDetails = new JSONObject();
 		appointmentDetails.put("AppointmentDate", newAppointment.getDate());

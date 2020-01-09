@@ -18,7 +18,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 
 public class CreateUsersPage extends JFrame {
-	private AdministratorController administratorController = new AdministratorController();
 
 	private JPanel contentPane;
 	private JTextField givenNameTxt;
@@ -129,8 +128,9 @@ public class CreateUsersPage extends JFrame {
 				if (rdbtnPatient.isSelected()) {
 					userType = "Patient";
 				}
-				administratorController.ReceivePotentialUserDetails(givenName, surname, uniqueIDValue, password,
-						userType); // and send them to the admin controller to be created
+
+				AdministratorController.getInstance().ReceivePotentialUserDetails(givenName, surname, uniqueIDValue,
+						password, userType); // and send them to the admin controller to be created
 
 				givenNameTxt.setText("");
 				surnameTxt.setText("");

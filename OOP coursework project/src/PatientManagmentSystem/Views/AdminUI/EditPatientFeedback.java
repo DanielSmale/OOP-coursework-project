@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
 public class EditPatientFeedback extends JFrame {
-	private AdministratorController administratorController = new AdministratorController();
+
 
 	private JPanel contentPane;
 	private JTextField doctorIDTextField;
@@ -83,7 +83,7 @@ public class EditPatientFeedback extends JFrame {
 
 				DoctorFeedback edittedDoctorFeedback = new DoctorFeedback(doctorIDTextField.getText(),
 						Integer.parseInt(ratingText.getText()), edittedFeedbackTextArea.getText());
-				administratorController.StoreEdittedFeedback(edittedDoctorFeedback);
+				AdministratorController.getInstance().StoreEdittedFeedback(edittedDoctorFeedback);
 
 				edittedFeedbackTextArea.setText(""); // reset the text after sending the data
 
@@ -115,7 +115,7 @@ public class EditPatientFeedback extends JFrame {
 
 		DefaultListModel<String> feedbackDataListModel = new DefaultListModel<String>();
 
-		DoctorFeedback[] feedbackArray = administratorController.ReturnFeedbackDetails();
+		DoctorFeedback[] feedbackArray = AdministratorController.getInstance().ReturnFeedbackDetails();
 
 		for (int i = 0; i < feedbackArray.length; i++) {
 

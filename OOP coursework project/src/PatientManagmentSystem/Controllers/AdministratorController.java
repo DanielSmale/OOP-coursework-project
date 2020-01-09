@@ -22,14 +22,29 @@ import sun.print.resources.serviceui;
 import sun.security.util.ArrayUtil;
 
 public class AdministratorController {
+	private static AdministratorController instance;
+
+	// An implementation of the singleton pattern
+
+	private void AdministratorController() {
+
+	}
+
+	public static AdministratorController getInstance() {
+		if (instance == null) {
+			instance = new AdministratorController();
+		}
+		return instance;
+	}
 
 	PotentialUser potentialUser;
 
-	private boolean appendToFile = true;
+	private boolean appendToFile = true; // Whether or not we are going to overwrite the JSON file
+	// or add to the end of it
 
 	public void ReceivePotentialUserDetails(String givenName, String surname, String uniqueID, String password,
 			String userType) {
-
+// Called from the administrators create users GUI. This method takes the provided data and passes it on to the userFactory to decide which user to add
 		UserFactory userFactory = new UserFactory();
 
 		userFactory.CreateUser(givenName, surname, uniqueID, password, userType);
@@ -81,7 +96,7 @@ public class AdministratorController {
 		// now store it again
 		for (int i = 0; i < inDoctors.length; i++) {
 
-			StoreDoctorDetails(inDoctors[i],false);
+			StoreDoctorDetails(inDoctors[i], false);
 		}
 	}
 
@@ -130,7 +145,7 @@ public class AdministratorController {
 		// now store it again
 		for (int i = 0; i < inPatients.length; i++) {
 
-			StorePatientDetails(inPatients[i],false);
+			StorePatientDetails(inPatients[i], false);
 		}
 	}
 
@@ -179,12 +194,12 @@ public class AdministratorController {
 		// now store it again
 		for (int i = 0; i < inSecretarys.length; i++) {
 
-			StoreSecretaryDetails(inSecretarys[i],false);
+			StoreSecretaryDetails(inSecretarys[i], false);
 		}
 	}
 
 	public DoctorFeedback[] ReturnFeedbackDetails() {
-
+//This method passes feedback to the edit feedback GUI
 		String outInfo = "";
 		try (BufferedReader reader = new BufferedReader(new FileReader("feedbackFile.json"))) {
 			{
@@ -241,6 +256,8 @@ public class AdministratorController {
 
 	public void StoreDoctorDetails(AbstractUser doctorToStore, boolean appendToFile) {
 		File doctorsFile = new File("doctorsFile.json");
+		// This method is called from the User Factory class
+		// After the user is created, serialise them to the file
 
 		JSONObject doctorDetails = new JSONObject();
 		doctorDetails.put("givenName", doctorToStore.getGivenName());
@@ -266,6 +283,8 @@ public class AdministratorController {
 
 	public void StoreSecretaryDetails(AbstractUser secretaryToStore, boolean appendToFile) {
 		File secretarysFile = new File("secretarysFile.json");
+		// This method is called from the User Factory class
+		// After the user is created, serialise them to the file
 
 		JSONObject secretaryDetails = new JSONObject();
 		secretaryDetails.put("givenName", secretaryToStore.getGivenName());
@@ -291,6 +310,8 @@ public class AdministratorController {
 
 	public void StorePatientDetails(AbstractUser patientToStore, boolean appendToFile) {
 		File patientFile = new File("patientsFile.json");
+		// This method is called from the User Factory class
+		// After the user is created, serialise them to the file
 
 		JSONObject patientDetails = new JSONObject();
 		patientDetails.put("givenName", patientToStore.getGivenName());

@@ -4,7 +4,6 @@ import PatientManagmentSystem.Controllers.AdministratorController;
 import PatientManagmentSystem.Controllers.DoctorController;
 import PatientManagmentSystem.Controllers.PatientController;
 import PatientManagmentSystem.DataModel.DoctorFeedback;
-import PatientManagmentSystem.DataModel.AdministratorSystem.ReceivePatientFeedback;
 
 public class GiveFeedback {
 

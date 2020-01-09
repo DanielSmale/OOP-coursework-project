@@ -18,7 +18,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class LoginPage extends JFrame {
-
+public boolean succussfulLogin = false;
+	
+	
 	private JPanel contentPane;
 	private JTextField givenNameTxt;
 	private JTextField surnameTxt;
@@ -113,6 +115,11 @@ public class LoginPage extends JFrame {
 					adminMainPage.setVisible(true); // and take them to their administrator page
 				}
 
+				//if(givenName && password == to one of the all users let them login
+				
+				
+				
+				
 				givenNameTxt.setText(""); // reset them after
 				surnameTxt.setText("");
 				uniqueIDTxt.setText("");
