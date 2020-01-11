@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 
 public class AccountRequestGUI extends JFrame {
 	SecretaryController secretaryController = new SecretaryController();
@@ -96,12 +97,13 @@ public class AccountRequestGUI extends JFrame {
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
+				Random uniqueIDNumberGenerator = new Random();
+
 				String givenName = givenNametextField.getText();
 				String surname = surnameTextField.getText();
-				String uniqueIDValue = uniqueIDTextField.getText();
-				String password = passwordTextField.getText();
+				String uniqueIDValue = "P" + uniqueIDNumberGenerator.nextInt(1000);
 
-				PotentialUser potentialUser = new PotentialUser(givenName, surname, uniqueIDValue, password, "Patient");
+				String password = passwordTextField.getText();
 
 				secretaryController.ReceiveAccountRequest(givenName, surname, uniqueIDValue, password, "Patient");
 			}

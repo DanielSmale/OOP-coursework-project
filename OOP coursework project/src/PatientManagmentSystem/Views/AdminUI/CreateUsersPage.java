@@ -16,13 +16,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
+import java.util.Random;
 
 public class CreateUsersPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField givenNameTxt;
 	private JTextField surnameTxt;
-	private JTextField uniqueIDTxt;
 	private JTextField passwordTxt;
 
 	/**
@@ -65,12 +65,8 @@ public class CreateUsersPage extends JFrame {
 		lblSurname.setBounds(29, 98, 56, 16);
 		contentPane.add(lblSurname);
 
-		JLabel lblUniqueId = new JLabel("Unique ID");
-		lblUniqueId.setBounds(29, 127, 56, 16);
-		contentPane.add(lblUniqueId);
-
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(29, 156, 86, 16);
+		lblPassword.setBounds(29, 127, 86, 16);
 		contentPane.add(lblPassword);
 
 		givenNameTxt = new JTextField();
@@ -83,50 +79,52 @@ public class CreateUsersPage extends JFrame {
 		surnameTxt.setBounds(110, 98, 303, 22);
 		contentPane.add(surnameTxt);
 
-		uniqueIDTxt = new JTextField();
-		uniqueIDTxt.setColumns(10);
-		uniqueIDTxt.setBounds(110, 127, 303, 22);
-		contentPane.add(uniqueIDTxt);
-
 		passwordTxt = new JTextField();
 		passwordTxt.setColumns(10);
-		passwordTxt.setBounds(110, 156, 303, 22);
+		passwordTxt.setBounds(110, 127, 303, 22);
 		contentPane.add(passwordTxt);
 
 		JLabel lblUserType = new JLabel("User type");
-		lblUserType.setBounds(59, 200, 56, 16);
+		lblUserType.setBounds(59, 171, 56, 16);
 		contentPane.add(lblUserType);
 
 		JRadioButton rdbtnDoctor = new JRadioButton("Doctor");
-		rdbtnDoctor.setBounds(119, 196, 71, 25);
+		rdbtnDoctor.setBounds(119, 167, 71, 25);
 		contentPane.add(rdbtnDoctor);
 
 		JRadioButton rdbtnSecretary = new JRadioButton("Secretary");
-		rdbtnSecretary.setBounds(194, 196, 86, 25);
+		rdbtnSecretary.setBounds(194, 167, 86, 25);
 		contentPane.add(rdbtnSecretary);
 
 		JRadioButton rdbtnPatient = new JRadioButton("Patient");
-		rdbtnPatient.setBounds(286, 196, 127, 25);
+		rdbtnPatient.setBounds(286, 167, 127, 25);
 		contentPane.add(rdbtnPatient);
 
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
+				Random uniqueIDNumberGenerator = new Random();
+				
 				String givenName = givenNameTxt.getText();// take the values of the text box
 				String surname = surnameTxt.getText();
-				String uniqueIDValue = uniqueIDTxt.getText();
+				String uniqueIDValue = "";
 				String password = passwordTxt.getText();
 				String userType = null;
 
 				if (rdbtnDoctor.isSelected()) {
 					userType = "Doctor";
+					uniqueIDValue = "D" + uniqueIDNumberGenerator.nextInt(1000);
 				}
 				if (rdbtnSecretary.isSelected()) {
 					userType = "Secretary";
+					uniqueIDValue = "S" + uniqueIDNumberGenerator.nextInt(1000);
+
 				}
 				if (rdbtnPatient.isSelected()) {
 					userType = "Patient";
+					uniqueIDValue = "P" + uniqueIDNumberGenerator.nextInt(1000);
+
 				}
 
 				AdministratorController.getInstance().ReceivePotentialUserDetails(givenName, surname, uniqueIDValue,
@@ -134,7 +132,6 @@ public class CreateUsersPage extends JFrame {
 
 				givenNameTxt.setText("");
 				surnameTxt.setText("");
-				uniqueIDTxt.setText("");
 				passwordTxt.setText("");
 				rdbtnDoctor.setSelected(false);
 				rdbtnSecretary.setSelected(false);
@@ -142,7 +139,7 @@ public class CreateUsersPage extends JFrame {
 
 			}
 		});
-		btnEnter.setBounds(123, 255, 97, 25);
+		btnEnter.setBounds(123, 226, 97, 25);
 		contentPane.add(btnEnter);
 	}
 }

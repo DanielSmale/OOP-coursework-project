@@ -64,6 +64,11 @@ public class AddNotes {
 				doctorController.SendNotes(notesTextArea.getText(), dateTxt.getText(), patientIDTxt.getText(),
 						doctorIDTxt.getText());
 
+				
+				notesTextArea.setText("");
+				dateTxt.setText("");
+				patientIDTxt.setText("");
+				doctorIDTxt.setText("");
 			}
 		});
 		btnSave.setBounds(55, 461, 97, 25);

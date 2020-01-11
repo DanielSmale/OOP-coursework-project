@@ -17,8 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class GiveDoctorFeedback extends JFrame {
-private PatientController patientController = new PatientController();
-	
+	private PatientController patientController = new PatientController();
+
 	private JPanel contentPane;
 	private JTextField doctorIDTextField;
 	private JTextField ratingTextField;
@@ -79,20 +79,25 @@ private PatientController patientController = new PatientController();
 		ratingTextField.setBounds(126, 318, 116, 22);
 		contentPane.add(ratingTextField);
 		ratingTextField.setColumns(10);
-		
+
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				SendDoctorFeedback(doctorIDTextField.getText(),Integer.parseInt(ratingTextField.getText()), feedbackTextArea.getText());
+
+				SendDoctorFeedback(doctorIDTextField.getText(), Integer.parseInt(ratingTextField.getText()),
+						feedbackTextArea.getText()); // send the values off the text box to the secretary
+
+				doctorIDTextField.setText(""); // and empty the text boxes after
+				ratingTextField.setText("");
+				feedbackTextArea.setText("");
 			}
 		});
 		btnSubmit.setBounds(267, 318, 97, 25);
 		contentPane.add(btnSubmit);
 	}
-	
+
 	public void SendDoctorFeedback(String doctorID, int rating, String feedback) {
-		
+
 		patientController.SendDoctorFeedback(doctorID, rating, feedback);
 	}
 }

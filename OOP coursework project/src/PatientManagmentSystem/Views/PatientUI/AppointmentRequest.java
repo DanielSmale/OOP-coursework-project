@@ -108,6 +108,14 @@ public class AppointmentRequest extends JFrame {
 				patientController.CreateAppointmentRequest(PreferredDoctor.getText(), patientIDTxt.getText(),
 						preferedDates);
 
+				// clear text boxes
+
+				PreferredDoctor.setText("");
+				patientIDTxt.setText("");
+				PossibleDate1Txt.setText("");
+				PossibleDate2Txt.setText("");
+				PossibleDate3Txt.setText("");
+
 			}
 		});
 		btnSubmit.setBounds(62, 402, 97, 25);

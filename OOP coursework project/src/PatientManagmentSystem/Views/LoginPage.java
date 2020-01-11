@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import java.awt.event.ActionEvent;
 
 public class LoginPage extends JFrame {
@@ -99,18 +100,18 @@ public class LoginPage extends JFrame {
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { // when the user hits the enter button
 
+				Random uniqueIDNumberGenerator = new Random();
+				
 				String givenName = givenNameTxt.getText();// take the values of the text box
 				String surname = surnameTxt.getText();
-				String uniqueIDValue = uniqueIDTxt.getText();
+				String uniqueIDValue = "A" + uniqueIDNumberGenerator.nextInt(1000);
 				String password = passwordTxt.getText();
 
 				AdminMainPage adminMainPage = new AdminMainPage(); // create the administrator page
 				if (uniqueIDValue.equals("A1")) {
 					Administrator systemAdministrator = new Administrator(givenName, surname, uniqueIDValue, password);
 
-					AdministratorController administratorController = new AdministratorController();
-
-					administratorController.StoreAdministratorDetails(systemAdministrator, true);
+					AdministratorController.getInstance().StoreAdministratorDetails(systemAdministrator, true);
 
 					dispose();
 					adminMainPage.setVisible(true); // and take them to their administrator page
