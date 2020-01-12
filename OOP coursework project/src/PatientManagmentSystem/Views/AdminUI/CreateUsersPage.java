@@ -105,12 +105,23 @@ public class CreateUsersPage extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				Random uniqueIDNumberGenerator = new Random();
-				
-				String givenName = givenNameTxt.getText();// take the values of the text box
-				String surname = surnameTxt.getText();
+				String givenName = "";
+				String surname = "";
 				String uniqueIDValue = "";
-				String password = passwordTxt.getText();
+				String password = "";
 				String userType = null;
+				// take the values of the text box
+				if (givenNameTxt.getText() != null || givenNameTxt.getText() != "") {// check the values aren't null
+					givenName = givenNameTxt.getText();
+				}
+
+				if (surnameTxt.getText() != null || surnameTxt.getText() != "") {
+					surname = surnameTxt.getText();
+				}
+
+				if (passwordTxt.getText() != null || passwordTxt.getText() != "") {
+					password = passwordTxt.getText();
+				}
 
 				if (rdbtnDoctor.isSelected()) {
 					userType = "Doctor";

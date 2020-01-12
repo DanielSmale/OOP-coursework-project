@@ -18,7 +18,6 @@ import javax.swing.JRadioButton;
 
 public class RemoveUserUI extends JFrame {
 
-
 	private JPanel contentPane;
 	private JTextField userIDtextField;
 
@@ -82,16 +81,25 @@ public class RemoveUserUI extends JFrame {
 		btnRemoveUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (rdbtnDoctor.isSelected()) {
-					AdministratorController.getInstance().RemoveDoctor(userIDtextField.getText());
+				if (userIDtextField.getText() != null || userIDtextField.getText() != "") { // check the values aren't null
+					
+					if (rdbtnDoctor.isSelected()) {
+						AdministratorController.getInstance().RemoveDoctor(userIDtextField.getText());
+					}
 				}
 
-				if (rdbtnPatient.isSelected()) {
-					AdministratorController.getInstance().RemovePatient(userIDtextField.getText());
+				if (userIDtextField.getText() != null || userIDtextField.getText() != "") {
+
+					if (rdbtnPatient.isSelected()) {
+						AdministratorController.getInstance().RemovePatient(userIDtextField.getText());
+					}
 				}
 
-				if (rdbtnSecretary.isSelected()) {
-					AdministratorController.getInstance().RemoveSecretary(userIDtextField.getText());
+				if (userIDtextField.getText() != null || userIDtextField.getText() != "") {
+
+					if (rdbtnSecretary.isSelected()) {
+						AdministratorController.getInstance().RemoveSecretary(userIDtextField.getText());
+					}
 				}
 			}
 		});

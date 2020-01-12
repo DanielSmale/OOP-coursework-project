@@ -61,10 +61,12 @@ public class AddNotes {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				doctorController.SendNotes(notesTextArea.getText(), dateTxt.getText(), patientIDTxt.getText(),
-						doctorIDTxt.getText());
+				if (notesTextArea.getText() != null && dateTxt.getText() != null && patientIDTxt.getText() != null
+						&& doctorIDTxt.getText() != null) {
+					doctorController.SendNotes(notesTextArea.getText(), dateTxt.getText(), patientIDTxt.getText(),
+							doctorIDTxt.getText());
+				}
 
-				
 				notesTextArea.setText("");
 				dateTxt.setText("");
 				patientIDTxt.setText("");

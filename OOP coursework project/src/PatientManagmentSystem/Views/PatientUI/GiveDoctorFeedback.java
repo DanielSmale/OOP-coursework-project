@@ -84,8 +84,11 @@ public class GiveDoctorFeedback extends JFrame {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				SendDoctorFeedback(doctorIDTextField.getText(), Integer.parseInt(ratingTextField.getText()),
-						feedbackTextArea.getText()); // send the values off the text box to the secretary
+				if (doctorIDTextField.getText() != null && ratingTextField.getText() != null
+						&& feedbackTextArea.getText() != null) {
+					SendDoctorFeedback(doctorIDTextField.getText(), Integer.parseInt(ratingTextField.getText()),
+							feedbackTextArea.getText()); // send the values off the text box to the secretary
+				}
 
 				doctorIDTextField.setText(""); // and empty the text boxes after
 				ratingTextField.setText("");

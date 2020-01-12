@@ -114,12 +114,20 @@ public class PrescribeMedicines extends JFrame {
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int quantity = 0;
+				double dosage = 0;
+				if (quantityTxt.getText() != null) {
+					quantity = Integer.parseInt(quantityTxt.getText());
+				}
+				if (dosageTxt.getText() != null) {
+					dosage= Double.parseDouble(dosageTxt.getText());
+				}
 
-				int quantity = Integer.parseInt(quantityTxt.getText());
-				double dosage = Double.parseDouble(dosageTxt.getText());
-
-				doctorController.CreateNewPrescription(doctorIDTxt.getText(), patientIDTxt.getText(),
-						notesTextArea.getText(), medicineNameTxt.getText(), quantity, dosage);
+				if (doctorIDTxt.getText() != null && patientIDTxt.getText() != null && notesTextArea.getText() != null
+						&& medicineNameTxt.getText() != null) {
+					doctorController.CreateNewPrescription(doctorIDTxt.getText(), patientIDTxt.getText(),
+							notesTextArea.getText(), medicineNameTxt.getText(), quantity, dosage);
+				}
 
 				// now clear the text boxes ready for next time
 				doctorIDTxt.setText("");

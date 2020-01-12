@@ -94,9 +94,13 @@ public class DoctorCreateAppointment {
 		btnCreateAppointment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				doctorController.SendAppointmentDetails(AppointmentDateTxt.getText(), patientIDTxt.getText(),
-						doctorIDTxt.getText());
+				if (AppointmentDateTxt.getText() != null && patientIDTxt.getText() != null
+						&& doctorIDTxt.getText() != null) {
 
+					doctorController.SendAppointmentDetails(AppointmentDateTxt.getText(), patientIDTxt.getText(),
+							doctorIDTxt.getText());
+				}
+				
 				patientIDTxt.setText("");
 				doctorIDTxt.setText("");
 				AppointmentDateTxt.setText("");

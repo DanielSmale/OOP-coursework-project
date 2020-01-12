@@ -99,11 +99,23 @@ public class AccountRequestGUI extends JFrame {
 
 				Random uniqueIDNumberGenerator = new Random();
 
-				String givenName = givenNametextField.getText();
-				String surname = surnameTextField.getText();
-				String uniqueIDValue = "P" + uniqueIDNumberGenerator.nextInt(1000);
+				String givenName = "";
+				String surname = "";
+				String password = "";
 
-				String password = passwordTextField.getText();
+				if (givenNametextField.getText() != null || givenNametextField.getText() != "") {
+					givenName = givenNametextField.getText();
+				}
+
+				if (surnameTextField.getText() != null || surnameTextField.getText() != "") {
+					surname = surnameTextField.getText();
+				}
+
+				if (passwordTextField.getText() != null || passwordTextField.getText() != "") {
+					password = passwordTextField.getText();
+				}
+
+				String uniqueIDValue = "P" + uniqueIDNumberGenerator.nextInt(1000);
 
 				secretaryController.ReceiveAccountRequest(givenName, surname, uniqueIDValue, password, "Patient");
 			}
