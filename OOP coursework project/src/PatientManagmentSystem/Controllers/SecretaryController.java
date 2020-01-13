@@ -2,6 +2,7 @@ package PatientManagmentSystem.Controllers;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import PatientManagmentSystem.DataModel.Appointment;
+import PatientManagmentSystem.DataModel.DoctorFeedback;
+import PatientManagmentSystem.DataModel.Medicine;
 import PatientManagmentSystem.DataModel.PotentialUser;
 import PatientManagmentSystem.DataModel.DoctorSystem.Doctor;
 
@@ -64,12 +67,11 @@ public class SecretaryController {
 		}
 
 		JSONObject allAppointmentInfo = new JSONObject(outInfo);
-
+		// this might be wrong
 		Appointment[] allAppointments = (Appointment[]) allAppointmentInfo.get("Appointment");
 		System.out.println(allAppointments);
 
 		return allAppointments;
-
 	}
 
 	public void StoreAppointmentDetails(Appointment newAppointment) {
@@ -86,14 +88,67 @@ public class SecretaryController {
 		try (FileWriter writer = new FileWriter(appointmentsFile, appendToFile)) {
 			{
 				writer.write(appointment.toString());
-				writer.flush();
 
+				writer.flush();
 				writer.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		System.out.printf("File is located at %s%n", appointmentsFile.getAbsolutePath());
+	}
+
+	public void StoreMedicineDetails(Medicine newMedicine,boolean appendToFile) {
+		File medicinesFile = new File("medicinesFile.json");
+
+		JSONObject medcineDetails = new JSONObject();
+		medcineDetails.put("medicineName", newMedicine.getMedicineName());
+		medcineDetails.put("stock", newMedicine.getStock());
+
+		JSONArray medicine = new JSONArray();
+		medicine.put(medcineDetails);
+
+		try (FileWriter writer = new FileWriter(medicinesFile, appendToFile)) {
+
+			writer.write(medicine.toString());
+
+			writer.flush();
+			writer.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.printf("File is located at %s%n", medicinesFile.getAbsolutePath());
+
+	}
+
+	public Medicine[] ReturnMedicines() {
+
+		String outInfo = "";
+		try (BufferedReader reader = new BufferedReader(new FileReader("medicinesFile.json"))) {
+			outInfo = reader.readLine();
+
+			reader.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		JSONArray storedMedicines = new JSONArray(outInfo);
+
+		int length = storedMedicines.length();
+		Medicine[] readMedicines = new Medicine[storedMedicines.length()];
+		for (int i = 0; i < length; i++) {
+
+			JSONObject medicine = storedMedicines.getJSONObject(i);
+
+			Medicine current = new Medicine(medicine.getString("medicineName"), medicine.getInt("stock"));
+			readMedicines[i] = current;
+
+		}
+		return readMedicines;
 	}
 
 }

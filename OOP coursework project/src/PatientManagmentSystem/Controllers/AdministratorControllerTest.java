@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import PatientManagmentSystem.DataModel.AdministratorSystem.Administrator;
 import PatientManagmentSystem.DataModel.DoctorSystem.Doctor;
 import PatientManagmentSystem.DataModel.PatientSystem.Patient;
 import PatientManagmentSystem.DataModel.SecretarySystem.Secretary;
@@ -157,12 +158,47 @@ class AdministratorControllerTest {
 
 	@Test
 	void testStoreAdministratorDetails() {
-		fail("Not yet implemented");
+		Administrator t = new Administrator("testing", "testing", "T2", "password");
+		testController.StorePatientDetails(t, true);
+
+		// Read all the data in
+		String outInfo = "";
+		try (BufferedReader reader = new BufferedReader(new FileReader("administratorFile.json"))) {
+			{
+				outInfo = reader.readLine();
+
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// De-serialise it
+		JSONArray storedUsers = new JSONArray(outInfo);
+
+		int length = storedUsers.length();
+		Administrator[] inAdmin = new Administrator[storedUsers.length()];
+
+		for (int i = 0; i < length; i++) {
+
+			JSONObject currentUser = storedUsers.getJSONObject(i);
+
+			Administrator current = new Administrator(currentUser.getString("givenName"),
+					currentUser.getString("surname"), currentUser.getString("uniqueID"),
+					currentUser.getString("password"));
+
+			inAdmin[i] = current;
+
+		}
+
+		// at length-1 because that is the index of the last object in the
+		// file where the next user was put
+		assertEquals("testing", inAdmin[length - 1].getGivenName());
+		assertEquals("testing", inAdmin[length - 1].getSurname());
+		assertEquals("T2", inAdmin[length - 1].getUniqueID());
+		assertEquals("password", inAdmin[length - 1].getPassword());
 	}
 
-	@Test
-	void testReceivePotentialUserDetails() {
 
-	}
 
 }

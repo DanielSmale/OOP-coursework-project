@@ -5,8 +5,10 @@ public class Medicine {
 	private String medicineName;
 	private int stock;
 
-	public Medicine(String string, int int1) {
-		// TODO Auto-generated constructor stub
+	public Medicine(String medicineName, int stock) {
+this.medicineName = medicineName;
+this.stock = stock;
+		
 	}
 
 	public String getMedicineName() {
