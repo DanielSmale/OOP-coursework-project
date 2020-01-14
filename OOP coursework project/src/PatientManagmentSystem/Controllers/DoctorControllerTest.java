@@ -24,7 +24,7 @@ class DoctorControllerTest {
 
 	@Test
 	void testStoreAppointmentDetails() {
-		
+
 		Appointment testApp = new Appointment("testuesday", "tP1", "tD1");
 
 		testController.StoreAppointmentDetails(testApp);
@@ -37,14 +37,32 @@ class DoctorControllerTest {
 	@Test
 	void testReturnAppointmentsDetails() {
 
-	Appointment testApp = new Appointment("testuesday", "tP1", "tD1");
-		
+		Appointment testApp = new Appointment("testuesday", "tP1", "tD1");
+
 		testController.StoreAppointmentDetails(testApp);
 		Appointment[] appointment = testController.ReturnAppointmentsDetails();
-		assertEquals("testuesday" , appointment[0].getDate());
-		assertEquals("tP1" , appointment[0].getPatientID());
-		assertEquals("tD1" , appointment[0].getDoctorID());
-		
+		assertEquals("testuesday", appointment[0].getDate());
+		assertEquals("tP1", appointment[0].getPatientID());
+		assertEquals("tD1", appointment[0].getDoctorID());
+
+	}
+
+	@Test
+	void testCreateNewPrescription() {
+
+		testController.CreateNewPrescription("tD1", "tP1", "im testing", "testyprofine", 10000, 100);
+
+		PatientController tp = new PatientController();
+
+		Prescription[] p = tp.ReturnPrescriptionDetails();
+
+		assertEquals("tD1", p[0].getDoctorID());
+		assertEquals("tP1", p[0].getPatientID());
+		assertEquals("im testing", p[0].getDoctorNote().getNotes());
+		assertEquals("testyprofine", p[0].getMedicine().getMedicineName());
+		assertEquals("10000", p[0].getQuantity());
+		assertEquals("100", p[0].getDosage());
+
 	}
 
 	@Test
@@ -58,28 +76,8 @@ class DoctorControllerTest {
 	}
 
 	@Test
-	void testCreateNewPrescription() {
-			
-		testController.CreateNewPrescription("tD1", "tP1", "im testing", "testyprofine", 10000, 100);
-		
-		PatientController tp = new PatientController();
-		
-		Prescription[] p = tp.ReturnPrescriptionDetails();
-
-		assertEquals("tD1" , p[0].getDoctorID());
-		assertEquals("tP1" , p[0].getPatientID());
-		assertEquals("im testing" , p[0].getDoctorNote().getNotes());
-		assertEquals("testyprofine" , p[0].getMedicine().getMedicineName());
-		assertEquals("10000" , p[0].getQuantity());
-		assertEquals("100" , p[0].getDosage());
-
-		
-	}
-
-	@Test
 	void testStorePrescriptionDetails() {
-		
-		
+
 	}
 
 }
