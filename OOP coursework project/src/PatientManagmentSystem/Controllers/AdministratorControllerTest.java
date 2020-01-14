@@ -72,7 +72,7 @@ class AdministratorControllerTest {
 	void testStoreSecretaryDetails() {
 
 		Secretary t = new Secretary("testing", "testing", "T2", "password");
-		testController.StoreDoctorDetails(t, true);
+		testController.StoreSecretaryDetails(t, true);
 
 		// Read all the data in
 		String outInfo = "";
@@ -159,7 +159,7 @@ class AdministratorControllerTest {
 	@Test
 	void testStoreAdministratorDetails() {
 		Administrator t = new Administrator("testing", "testing", "T2", "password");
-		testController.StorePatientDetails(t, true);
+		testController.StoreAdministratorDetails(t, true);
 
 		// Read all the data in
 		String outInfo = "";

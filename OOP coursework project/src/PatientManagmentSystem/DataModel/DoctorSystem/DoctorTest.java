@@ -17,8 +17,7 @@ class DoctorTest {
 	@Test
 	void testSetGivenName() {
 		test.setGivenName("test1");
-
-		assertEquals("test1", test.getSurname());
+		assertEquals("test1", test.getGivenName());
 	}
 
 	@Test
@@ -56,7 +55,7 @@ class DoctorTest {
 	@Test
 	void testSetPassword() {
 
-		test.setUniqueID("Tester");
+		test.setPassword("Tester");
 		assertEquals("Tester", test.getPassword());
 	}
 }
