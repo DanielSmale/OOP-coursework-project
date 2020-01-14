@@ -100,11 +100,9 @@ public class LoginPage extends JFrame {
 		btnEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { // when the user hits the enter button
 
-				Random uniqueIDNumberGenerator = new Random();
-				
 				String givenName = givenNameTxt.getText();// take the values of the text box
 				String surname = surnameTxt.getText();
-				String uniqueIDValue = "A" + uniqueIDNumberGenerator.nextInt(1000);
+				String uniqueIDValue = uniqueIDTxt.getText();
 				String password = passwordTxt.getText();
 
 				AdminMainPage adminMainPage = new AdminMainPage(); // create the administrator page
@@ -115,17 +113,16 @@ public class LoginPage extends JFrame {
 
 					dispose();
 					adminMainPage.setVisible(true); // and take them to their administrator page
-				}
+				} else {
+					AbstractUser[] allUsers = ReturnAllUsers.getInstance().ReturnUsers();
 
-				AbstractUser[] allUsers = ReturnAllUsers.getInstance().ReturnUsers();
-
-				for (int i = 0; i < allUsers.length - 1; i++) {
-					if (givenName == allUsers[i].getGivenName() && surname == allUsers[i].getSurname()
-							&& password == allUsers[i].getPassword()) {
-						succussfulLogin = true;
+					for (int i = 0; i < allUsers.length - 1; i++) {
+						if (givenName == allUsers[i].getGivenName() && surname == allUsers[i].getSurname()
+								&& password == allUsers[i].getPassword()) {
+							succussfulLogin = true;
+						}
 					}
 				}
-
 				givenNameTxt.setText(""); // reset them after
 				surnameTxt.setText("");
 				uniqueIDTxt.setText("");

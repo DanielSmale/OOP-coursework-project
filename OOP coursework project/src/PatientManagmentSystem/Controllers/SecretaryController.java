@@ -97,15 +97,15 @@ public class SecretaryController {
 		}
 		System.out.printf("File is located at %s%n", appointmentsFile.getAbsolutePath());
 	}
+	JSONArray medicine = new JSONArray();
 
-	public void StoreMedicineDetails(Medicine newMedicine,boolean appendToFile) {
+	public void StoreMedicineDetails(Medicine newMedicine, boolean appendToFile) {
 		File medicinesFile = new File("medicinesFile.json");
 
 		JSONObject medcineDetails = new JSONObject();
 		medcineDetails.put("medicineName", newMedicine.getMedicineName());
 		medcineDetails.put("stock", newMedicine.getStock());
 
-		JSONArray medicine = new JSONArray();
 		medicine.put(medcineDetails);
 
 		try (FileWriter writer = new FileWriter(medicinesFile, appendToFile)) {

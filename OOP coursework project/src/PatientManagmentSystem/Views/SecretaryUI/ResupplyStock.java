@@ -78,14 +78,14 @@ public class ResupplyStock extends JFrame {
 
 				int i;
 				for (i = 0; i < medicinesList.length; i++) {
-					System.out.println(medicineStocklist.getSelectedValue());
-					if (medicineStocklist.getSelectedValue() == medicinesList[i].getMedicineName() + " "
-							+ medicinesList[i].getStock()) {
 
-						System.out.println(medicinesList[i].getMedicineName() + " " + medicinesList[i].getStock());
+					if (medicineStocklist.getSelectedIndex() == i) {
+
 						int stock = medicinesList[i].getStock() + Integer.parseInt(orderAmountTxt.getText());
+
 						medicinesList[i].setStock(stock);
-						secretaryController.StoreMedicineDetails(medicinesList[i], true);
+
+						secretaryController.StoreMedicineDetails(medicinesList[i], false);
 					}
 				}
 			}

@@ -23,7 +23,6 @@ public class AccountRequestGUI extends JFrame {
 	private JPanel contentPane;
 	private JTextField givenNametextField;
 	private JTextField surnameTextField;
-	private JTextField uniqueIDTextField;
 	private JTextField passwordTextField;
 
 	/**
@@ -65,12 +64,8 @@ public class AccountRequestGUI extends JFrame {
 		lblSurname.setBounds(12, 74, 56, 16);
 		contentPane.add(lblSurname);
 
-		JLabel lblUniqueId = new JLabel("Unique ID");
-		lblUniqueId.setBounds(12, 103, 56, 16);
-		contentPane.add(lblUniqueId);
-
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(12, 132, 86, 16);
+		lblPassword.setBounds(12, 112, 86, 16);
 		contentPane.add(lblPassword);
 
 		givenNametextField = new JTextField();
@@ -83,14 +78,9 @@ public class AccountRequestGUI extends JFrame {
 		surnameTextField.setBounds(93, 74, 303, 22);
 		contentPane.add(surnameTextField);
 
-		uniqueIDTextField = new JTextField();
-		uniqueIDTextField.setColumns(10);
-		uniqueIDTextField.setBounds(93, 103, 303, 22);
-		contentPane.add(uniqueIDTextField);
-
 		passwordTextField = new JTextField();
 		passwordTextField.setColumns(10);
-		passwordTextField.setBounds(93, 132, 303, 22);
+		passwordTextField.setBounds(93, 112, 303, 22);
 		contentPane.add(passwordTextField);
 
 		JButton btnEnter = new JButton("Enter");
@@ -120,7 +110,7 @@ public class AccountRequestGUI extends JFrame {
 				secretaryController.ReceiveAccountRequest(givenName, surname, uniqueIDValue, password, "Patient");
 			}
 		});
-		btnEnter.setBounds(103, 179, 97, 25);
+		btnEnter.setBounds(103, 159, 97, 25);
 		contentPane.add(btnEnter);
 	}
 }
